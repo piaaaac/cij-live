@@ -1,0 +1,153 @@
+@charset "UTF-8";
+@import 'bootstrap-scss/_functions';
+@import 'bootstrap-scss/_variables';
+@import 'bootstrap-scss/mixins/_breakpoints';
+
+// ------------------------------------------------------------------------
+// Variables
+// ------------------------------------------------------------------------
+
+$orange: #FA7935;
+$purple: #8197FF;
+
+$space: 20px;
+$col-w: 70px;
+
+// ------------------------------------------------------------------------
+// External files import
+// ------------------------------------------------------------------------
+
+@import '_reset';
+@import '_typography';
+@import '_mixins';
+
+
+// ------------------------------------------------------------------------
+// General tags & classes
+// ------------------------------------------------------------------------
+
+* {
+}
+body {
+
+  main {
+
+  }
+}
+
+a {
+	cursor: pointer;
+  &.button {
+    display: inline-flex;
+    height: 36px;
+    justify-content: center;
+    align-items: center;
+    background-color: $purple;
+    color: white;
+    text-decoration: none;
+    padding: 0 15px;
+    margin-right: 5px;
+    margin-top: 5px;
+    @include transition(background-color 400ms);
+    &:hover {
+      background-color: darken($red, 5%);
+    }
+    &.external {
+      &::before {
+        content: "↗";
+        margin-right: 0.5em;
+      }
+    }
+  }
+}
+
+
+// ------------------------------------------------------------------------
+// Utilities
+// ------------------------------------------------------------------------
+
+.color-white  { color: white; }
+.color-grey   { color: #ABABAB; }
+.color-purple { color: $purple; }
+.color-orange { color: $orange; }
+.upper        { text-transform: uppercase; }
+.blurred      { filter: blur(1vh); }
+
+
+// ------------------------------------------------------------------------
+// Grid
+// ------------------------------------------------------------------------
+
+section#bg {
+  div#bg-video {
+    position: fixed;
+    top: 0; bottom: 0; left: 0; right: 0;
+  }
+}
+
+section#ui {
+  position: fixed;
+  top: 0; bottom: 0; left: 0; right: 0;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
+
+  div.column {
+    // width: $col-w;
+    min-width: $col-w;
+    // border: 1px solid grey;
+    @include transition(flex-grow 400ms, min-width 400ms);
+    overflow: hidden;
+    border-right: 1px solid rgba(255,255,255, 0.2);
+
+    &.expanded {
+      // width: 100%;
+      flex-grow: 1;
+    }
+
+    &.closed {
+      min-width: 0;
+      flex-grow: 0;
+      width: 0;
+    }
+
+    .rotated-bar {
+      transform: rotate(-90deg);
+      transform-origin: 50vh 50vh;
+      height: $col-w;
+      width: 100vh;
+      position: absolute;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 $space;
+    }
+
+    &#home {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+
+
+// ------------------------------------------------------------------------
+// BOOTSTRAP BREAKPOINTS
+// ------------------------------------------------------------------------
+
+// xs ---                 Portrait phones
+// sm ---  576px and up   Small devices (landscape phones)
+// md ---  768px and up   Medium devices (tablets)
+// lg ---  992px and up   Large devices (desktops)
+// xl --- 1200px and up   Extra large devices (large desktops)
+
+// No media query necessary for xs breakpoint as it's effectively `@media (min-width: 0) { ... }`
+// @include media-breakpoint-up(sm) { ... }
+// @include media-breakpoint-only(md) { ... }
+// @include media-breakpoint-between(md, xl) { ... }
+// @include media-breakpoint-down(lg) { ... }
