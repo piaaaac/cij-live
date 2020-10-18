@@ -58,47 +58,72 @@ html body input:-internal-autofill-selected {
   font-family: NeueBit;
   font-weight: bold;
   src: url("../fonts/NeueBit-Bold.otf") format("opentype"); }
-.font-xxl {
-  font-family: "NeueBit", sans-serif;
+@font-face {
+  font-family: Graphik;
+  font-weight: 500;
+  src: url("../fonts/Graphik-Medium.otf") format("opentype"); }
+.font-bit-xxl {
+  font-family: "NeueBit", monospace;
   font-size: 90px;
   letter-spacing: 0;
-  line-height: 1.3em;
-  font-weight: 400;
+  line-height: 0.7em;
+  font-weight: 700;
   font-style: normal;
   font-stretch: normal; }
   @media (min-width: 576px) {
-    .font-xxl {
+    .font-bit-xxl {
       font-size: 90px; } }
   @media (min-width: 768px) {
-    .font-xxl {
+    .font-bit-xxl {
       font-size: 90px; } }
   @media (min-width: 992px) {
-    .font-xxl {
+    .font-bit-xxl {
       font-size: 90px; } }
   @media (min-width: 1200px) {
-    .font-xxl {
+    .font-bit-xxl {
       font-size: 90px; } }
 
-.font-xl {
-  font-family: "NeueBit", sans-serif;
+.font-bit-xl {
+  font-family: "NeueBit", monospace;
   font-size: 60px;
   letter-spacing: 0;
   line-height: 1.3em;
-  font-weight: 400;
+  font-weight: 700;
   font-style: normal;
   font-stretch: normal; }
   @media (min-width: 576px) {
-    .font-xl {
+    .font-bit-xl {
       font-size: 60px; } }
   @media (min-width: 768px) {
-    .font-xl {
+    .font-bit-xl {
       font-size: 60px; } }
   @media (min-width: 992px) {
-    .font-xl {
+    .font-bit-xl {
       font-size: 60px; } }
   @media (min-width: 1200px) {
-    .font-xl {
+    .font-bit-xl {
       font-size: 60px; } }
+
+.font-sans-m {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  letter-spacing: 0;
+  line-height: 22px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal; }
+  @media (min-width: 576px) {
+    .font-sans-m {
+      font-size: 18px; } }
+  @media (min-width: 768px) {
+    .font-sans-m {
+      font-size: 18px; } }
+  @media (min-width: 992px) {
+    .font-sans-m {
+      font-size: 18px; } }
+  @media (min-width: 1200px) {
+    .font-sans-m {
+      font-size: 18px; } }
 
 /* USAGE 
 @include keyframes(slide-down) {
@@ -113,24 +138,51 @@ html body input:-internal-autofill-selected {
   @include animation('slide-down 5s 3');
 }
 */
+body.watching section#bg div#bg-video {
+  opacity: 1;
+  filter: blur(0); }
+body.watching section#ui {
+  pointer-events: none;
+  opacity: 0; }
+
 a {
   cursor: pointer; }
   a.button {
     display: inline-flex;
-    height: 36px;
+    height: 40px;
     justify-content: center;
     align-items: center;
-    background-color: #8197FF;
-    color: white;
+    background-color: #FA7935;
+    color: black;
     text-decoration: none;
     padding: 0 15px;
     margin-right: 5px;
     margin-top: 5px;
+    min-width: 250px;
+    font-family: "Graphik", sans-serif;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: 22px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
     -webkit-transition: background-color 400ms;
     -moz-transition: background-color 400ms;
     -ms-transition: background-color 400ms;
     -o-transition: background-color 400ms;
     transition: background-color 400ms; }
+    @media (min-width: 576px) {
+      a.button {
+        font-size: 18px; } }
+    @media (min-width: 768px) {
+      a.button {
+        font-size: 18px; } }
+    @media (min-width: 992px) {
+      a.button {
+        font-size: 18px; } }
+    @media (min-width: 1200px) {
+      a.button {
+        font-size: 18px; } }
     a.button:hover {
       background-color: #d32535; }
     a.button.external::before {
@@ -155,12 +207,32 @@ a {
 .blurred {
   filter: blur(1vh); }
 
-section#bg div#bg-video {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0; }
+.font-bold {
+  font-weight: 700; }
+
+.max-text-w {
+  max-width: 9em; }
+
+.vspace {
+  height: 20px; }
+
+section#bg {
+  background-color: black;
+  height: 100vh; }
+  section#bg div#bg-video {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.3;
+    transform: scale(5);
+    filter: blur(1vh);
+    -webkit-transition: filter 400ms, transform 400ms;
+    -moz-transition: filter 400ms, transform 400ms;
+    -ms-transition: filter 400ms, transform 400ms;
+    -o-transition: filter 400ms, transform 400ms;
+    transition: filter 400ms, transform 400ms; }
 
 section#ui {
   position: fixed;
@@ -168,6 +240,11 @@ section#ui {
   bottom: 0;
   left: 0;
   right: 0;
+  -webkit-transition: opacity 400ms;
+  -moz-transition: opacity 400ms;
+  -ms-transition: opacity 400ms;
+  -o-transition: opacity 400ms;
+  transition: opacity 400ms;
   display: flex;
   flex-flow: row nowrap;
   align-items: stretch;
@@ -202,5 +279,7 @@ section#ui {
       display: flex;
       align-items: center;
       justify-content: center; }
+      section#ui div.column#home .highlight {
+        text-align: center; }
 
 /*# sourceMappingURL=index.css.map */

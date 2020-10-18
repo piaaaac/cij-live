@@ -13,6 +13,12 @@ fields:
       panel: Panel
       seminar: Seminar
       screening: Screening
+      discussion: Discussion
+    required: true
+
+  vimeo:
+    label: Vimeo id
+    type: text
     required: true
 
   img:

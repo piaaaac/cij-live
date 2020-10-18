@@ -1,12 +1,14 @@
 
-var a = new App();
-a.init();
-
 // -------------------------------------------
 // CLASSES
 // -------------------------------------------
 
 function App () {
+  this.mode = "navigation";
+  this.videoWidth = null;
+  this.videoHeight = null;
+
+  this.player;
   this.colLeft = $(".column#left");
   this.colHome = $(".column#home");
   this.colChannel1 = $(".column#channel-1");
@@ -30,33 +32,97 @@ function App () {
     });
   }
 
-  this.init = function () {
+  this.setMode = function (newMode) {
+    var prevMode = this.mode;
+    if (prevMode == newMode) {
+      return;
+    }
+    var availableModes = ["navigation", "watching"];
+    if (!availableModes.includes(newMode)) {
+      throw new Error('Unknown mode: '+ newMode);
+    }
+    this.mode = newMode;
+    if (this.mode == "navigation") {
+      $("body").removeClass("watching");
+      $("#bg-video").css({ "transform": "scale("+ this.scaleFactor +")" });
+    } else if (this.mode == "watching") {
+      $("body").addClass("watching");
+      $("#bg-video").css({ "transform": "scale(1)" });
+      this.player.play();
+    }
+  }
 
-    // Create bg video
+  this.initBgVideo = function (additionalOptions) {
 
     var options = {
-        id: 458126085,
-        autoplay: true,
+        // id: 458126085,
+        // autoplay: true,
         muted: true,
-        // width: $(window).width(),
+        // currentTime: 60,
+        width: $(window).width(),
         height: $(window).height(),
         title: false,
         byline: false,
         portrait: false,
-        loop: true
+        loop: true,
+        color: "#8197FF",
+        controls: false
     };
+
+    if (additionalOptions) {
+      Object.assign(options, additionalOptions);
+    }
+
+    // Create bg video
 
     // Will create inside the made-in-ny div:
     // <iframe src="https://player.vimeo.com/video/59777392?loop=1" width="640" height="360" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
-    var playerBg = new Vimeo.Player('bg-video', options);
-    $("body").click();
-    playerBg.play();
+    this.player = new Vimeo.Player('bg-video', options);
+    // $("body").click();
+    // this.player.setCurrentTime(70);
+    
+    var that = this;
+    this.player.getVideoWidth().then(function (w) {
+      that.videoWidth = w;
+      that.player.getVideoHeight().then(function (h) {
+        that.videoHeight = h;
 
+        var w = $(window).width();
+        var h = $(window).height();
+        var screenRatio = w/h;
+        var videoRatio = that.videoWidth/that.videoHeight;
+        if (screenRatio > videoRatio) {
+          that.scaleFactor = that.videoWidth/w;
+        } else {
+          that.scaleFactor = that.videoHeight/h;
+        }
+        if (that.mode == "navigation") {
+          $("#bg-video").css({ "transform": "scale("+ that.scaleFactor +")" });
+        }
+
+      });
+    });
+
+
+    this.player.play();
 
   }
 
+  this.handleResize = function () {
+    var that = this;
+    this.player.getCurrentTime().then(function (time) {
+      that.player.getVideoId().then(function (id) {
+        debugger;
+        that.player.destroy();
+        that.initBgVideo({"id": id});
+        that.player.setCurrentTime(time);
+      });
+    });
 
+  }
 }
+
+
 
 // -------------------------------------------
 // FUNCTIONS
@@ -66,16 +132,20 @@ function App () {
 // EVENTS
 // -------------------------------------------
 
+$(window).resize(function () {
+  a.handleResize();
+});
+
 // -------------------------------------------
 // KEY BINDINGS
 // -------------------------------------------
 
 document.addEventListener('keyup', function (event) {
-  // if (event.defaultPrevented) {
-  //   return; 
-  // }
-  // var key = event.key || event.keyCode;
-  // if (key === 'Escape' || key === 'Esc' || key === 27) {
-  //   a.closeDetail();
-  // }
+  if (event.defaultPrevented) {
+    return; 
+  }
+  var key = event.key || event.keyCode;
+  if (key === 'Escape' || key === 'Esc' || key === 27) {
+    a.setMode("navigation");
+  }
 });

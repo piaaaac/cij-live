@@ -29,6 +29,19 @@ $col-w: 70px;
 * {
 }
 body {
+  &.watching {
+    section#bg {
+      div#bg-video {
+        opacity: 1;
+        filter: blur(0);
+        // transform: scale(1);
+      }
+    }
+    section#ui {
+      pointer-events: none;
+      opacity: 0;
+    }
+  }
 
   main {
 
@@ -39,15 +52,17 @@ a {
 	cursor: pointer;
   &.button {
     display: inline-flex;
-    height: 36px;
+    height: 40px;
     justify-content: center;
     align-items: center;
-    background-color: $purple;
-    color: white;
+    background-color: $orange;
+    color: black;
     text-decoration: none;
     padding: 0 15px;
     margin-right: 5px;
     margin-top: 5px;
+    min-width: 250px;
+    @include font-sans-m;
     @include transition(background-color 400ms);
     &:hover {
       background-color: darken($red, 5%);
@@ -72,22 +87,31 @@ a {
 .color-orange { color: $orange; }
 .upper        { text-transform: uppercase; }
 .blurred      { filter: blur(1vh); }
-
+.font-bold    { font-weight: 700; }
+.max-text-w   { max-width: 9em; }
+.vspace       { height: $space; }
 
 // ------------------------------------------------------------------------
 // Grid
 // ------------------------------------------------------------------------
 
 section#bg {
+  background-color: black;
+  height: 100vh;
   div#bg-video {
     position: fixed;
     top: 0; bottom: 0; left: 0; right: 0;
+    opacity: 0.3;
+    transform: scale(5);
+    filter: blur(1vh);
+    @include transition(filter 400ms, transform 400ms);
   }
 }
 
 section#ui {
   position: fixed;
   top: 0; bottom: 0; left: 0; right: 0;
+  @include transition(opacity 400ms);
 
   display: flex;
   flex-flow: row nowrap;
@@ -130,6 +154,9 @@ section#ui {
       display: flex;
       align-items: center;
       justify-content: center;
+      .highlight {
+        text-align: center;
+      }
     }
   }
 }

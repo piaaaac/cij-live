@@ -16,9 +16,16 @@
     src: url("../fonts/NeueBit-Bold.otf") format("opentype");
 }
 
+@font-face {
+    font-family: Graphik;
+    font-weight: 500;
+    src: url("../fonts/Graphik-Medium.otf") format("opentype");
+}
+
 // @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500&display=swap');
 
-$font-bit: "NeueBit", sans-serif;
+$font-bit: "NeueBit", monospace;
+$font-sans: "Graphik", sans-serif;
 
 @mixin font-style($font-fam, $xs, $sm, $md, $lg, $xl, $letter-sp, $line-h, $weight, $style){
   font-family: $font-fam;
@@ -34,12 +41,14 @@ $font-bit: "NeueBit", sans-serif;
   @include media-breakpoint-up(xl) { font-size: $xl; }  
 }
 
-// ------------------------------------------------ xs ---- sm ---- md ---- lg ---- xl -- lsp ---- lh ---- w --- style
-@mixin font-xxl   { @include font-style($font-bit, 90px,  90px,   90px,   90px,   90px,     0,  1.3em,   400,   normal); }
-@mixin font-xl    { @include font-style($font-bit, 60px,  60px,   60px,   60px,   60px,     0,  1.3em,   400,   normal); }
+// ---------------------------------------------------- xs --- sm --- md --- lg --- xl - lsp ---- lh ---- w --- style
+@mixin font-bit-xxl { @include font-style($font-bit,  90px,  90px,  90px,  90px,  90px,    0,  0.7em,   700,   normal); }
+@mixin font-bit-xl  { @include font-style($font-bit,  60px,  60px,  60px,  60px,  60px,    0,  1.3em,   700,   normal); }
+@mixin font-sans-m  { @include font-style($font-sans, 18px,  18px,  18px,  18px,  18px,    0,   22px,   500,   normal); }
 
-.font-xxl         { @include font-xxl; }
-.font-xl          { @include font-xl; }
+.font-bit-xxl       { @include font-bit-xxl; }
+.font-bit-xl        { @include font-bit-xl; }
+.font-sans-m        { @include font-sans-m; }
 
 
 
