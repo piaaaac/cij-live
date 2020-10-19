@@ -19,6 +19,7 @@ $defaultChannel = 2;
 	
 	<section id="ui">
 
+		<!--  
 		<div id="left" class="column">
 			<div class="rotated-bar">
 				<div></div>
@@ -28,6 +29,15 @@ $defaultChannel = 2;
 				</a>
 			</div>
 		</div>
+		-->
+		<div id="top-left">
+			<a class="font-bit-xl" onclick="a.home();">
+				<span class="color-purple">cij</span>
+				<span class="color-white">stream</span>
+			</a>
+		</div>
+
+
 
 		<div id="home" class="">
 			
@@ -39,7 +49,7 @@ $defaultChannel = 2;
 						<span>NOW PLAYING</span>
 					</p>
 					<div class="vspace"></div>
-					<h1 class="title color-white font-bit-xl font-bold max-text-w">
+					<h1 class="title color-white font-bit-xxl font-bold max-text-w">
 						<?= $p->title() ?>
 					</h1>
 					<!-- <div class="vspace"></div> -->
@@ -74,10 +84,12 @@ $defaultChannel = 2;
 
 	</section>
 
-	<div id="logo-watching"
-			 class="test font-bit-l color-white"
-			 onclick='a.setMode("navigation");'>
-			 <a>= cij <span class="color-purple">stream</span></a>
+	<div id="logo-watching" class="font-bit-xl">
+		<a onclick='a.setMode("navigation");'>
+			<span class="color-white">=</span>
+			<span class="color-purple">cij</span>
+			<span class="color-white">stream</span>
+		</a>
 	</div>
 
 	<div id="bottom-left">

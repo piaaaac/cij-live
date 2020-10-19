@@ -19,11 +19,11 @@ if ($template == "channel") {
 
 <div id="channel-<?= $index ?>" class="column" data-channel-number="">
 	<div class="rotated-bar">
-		<a class="font-bit-xl color-white" <?= $onChannelClick ?>>
+		<a class="title font-bit-xl color-white" <?= $onChannelClick ?>>
 			<?= $index ?>&nbsp;&nbsp;&nbsp;<?= $channel->title() ?>
 		</a>
-		<a class="font-bit-xl color-white" onclick="a.toggleSchedule('channel-<?= $index ?>');">
-			<span class="arrow"></span>
+		<a class="font-bit-xl color-white-50 hover-white" onclick="a.toggleSchedule('channel-<?= $index ?>');">
+			<span class="arrow "></span>
 		</a>
 	</div>
 	<div class="schedule">

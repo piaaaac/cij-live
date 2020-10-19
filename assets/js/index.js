@@ -16,7 +16,6 @@ function App () {
 
   this.player;
   this.videoContainer = $("#bg-video");
-  this.colLeft = $(".column#left");
   this.colHome = $("#home");
   this.colChannels = $(".column[id^='channel-']");
 
@@ -99,6 +98,8 @@ function App () {
     $("#home .highlight .title").text(title);
     $("#now-playing-small .title").text(title);
     $(".small-channel-num").text(channelNum);
+    $("[id^='channel-'] .title").removeClass("active");
+    $("#channel-"+ channelNum +" .title").addClass("active");
 
     // --- Reset sizes
 

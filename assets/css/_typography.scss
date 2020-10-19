@@ -42,13 +42,15 @@ $font-sans: "Graphik", sans-serif;
 }
 
 // ---------------------------------------------------- xs --- sm --- md --- lg --- xl - lsp ---- lh ---- w --- style
-@mixin font-bit-xl  { @include font-style($font-bit,  50px,  50px,  50px,  50px,  60px,    0, 0.75em,   700,   normal); }
+@mixin font-bit-xxl { @include font-style($font-bit,  60px,  60px,  60px,  60px,  75px,    0, 0.75em,   700,   normal); }
+@mixin font-bit-xl  { @include font-style($font-bit,  40px,  40px,  40px,  40px,  54px,    0, 0.75em,   700,   normal); }
 @mixin font-bit-l   { @include font-style($font-bit,  30px,  30px,  30px,  30px,  40px,    0, 0.75em,   700,   normal); }
 @mixin font-sans-m  { @include font-style($font-sans, 18px,  18px,  18px,  18px,  18px,    0,   22px,   500,   normal); }
 @mixin font-sans-s  { @include font-style($font-sans, 14px,  14px,  14px,  14px,  14px,    0,   18px,   500,   normal); }
 
 .font-bit-l         { @include font-bit-l; }
 .font-bit-xl        { @include font-bit-xl; }
+.font-bit-xxl       { @include font-bit-xxl; }
 .font-sans-m        { @include font-sans-m; }
 .font-sans-s        { @include font-sans-s; }
 

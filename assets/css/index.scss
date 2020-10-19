@@ -37,7 +37,7 @@ body {
     section#ui #home {
       #now-playing-small {
         opacity: 1;
-        left: calc(#{$space * 1.5} - #{$col-w-xl});
+        left: $space;
         @include media-breakpoint-down(lg) { left: calc(#{$space} - #{$col-w-lg}); }
         pointer-events: all;
       }
@@ -157,6 +157,7 @@ $scn-size: 1.3em;
 .color-purple       { color: $purple; }
 .color-orange       { color: $orange; }
 .hover-purple:hover { color: $purple; }
+.hover-white:hover  { color: white; }
 .upper              { text-transform: uppercase; }
 .blurred            { filter: blur(1vh); }
 .font-bold          { font-weight: 700; }
@@ -201,6 +202,10 @@ section#ui {
     overflow: hidden;
     border-left: 1px solid rgba(255,255,255, 0.2);
 
+    &[id^='channel-'] .title.active {
+      color: $orange;
+    }
+
     &.expanded {
       min-width: calc(#{$col-w-xl} + #{$schedule-w-xl});
       @include media-breakpoint-down(lg) { min-width: calc(#{$col-w-lg} + #{$schedule-w-lg}); }
@@ -228,7 +233,7 @@ section#ui {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 $space;
+      padding: 0 $space 0 $space*1.5;
       .arrow::after {
         content: "↓";
         content: "↑";
@@ -277,7 +282,8 @@ section#ui {
         height: $col-w-lg;
         width: $col-w-lg;
       }
-      color: white;
+      color: rgba(255,255,255, 0.5);
+      &:hover { color: white; }
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -292,7 +298,7 @@ section#ui {
       top: 0; right: 0; bottom: 0; left: 0;
       display: flex;
       align-items: flex-end;
-      padding-bottom: $space;
+      padding-bottom: $space*1.5;
       justify-content: center;
       .highlight {
         @include transition(opacity 400ms);
@@ -316,7 +322,7 @@ section#ui {
       position: absolute; 
       bottom: $space * 1.5;
       opacity: 0;
-      left: 0;
+      left: $space * 2;
       pointer-events: none;
       // margin-right: 33%;
       max-width: 30vw;
@@ -336,10 +342,20 @@ section#ui {
 
 #bottom-left {
   position: fixed;
-  bottom: $space;
+  bottom: $space*1.5;
   left: $space;
   @include media-breakpoint-down(md) { display: none; }
+  
+  .logan-logo { max-width: 15vw; }
 }
+
+#top-left {
+  position: fixed;
+  z-index: 2;
+  top: $space;
+  left: $space;
+}
+
 
 
 // ------------------------------------------------------------------------

@@ -85,7 +85,7 @@ html body input:-internal-autofill-selected {
 
 .font-bit-xl {
   font-family: "NeueBit", monospace;
-  font-size: 50px;
+  font-size: 40px;
   letter-spacing: 0;
   line-height: 0.75em;
   font-weight: 700;
@@ -93,16 +93,37 @@ html body input:-internal-autofill-selected {
   font-stretch: normal; }
   @media (min-width: 576px) {
     .font-bit-xl {
-      font-size: 50px; } }
+      font-size: 40px; } }
   @media (min-width: 768px) {
     .font-bit-xl {
-      font-size: 50px; } }
+      font-size: 40px; } }
   @media (min-width: 992px) {
     .font-bit-xl {
-      font-size: 50px; } }
+      font-size: 40px; } }
   @media (min-width: 1200px) {
     .font-bit-xl {
+      font-size: 54px; } }
+
+.font-bit-xxl {
+  font-family: "NeueBit", monospace;
+  font-size: 60px;
+  letter-spacing: 0;
+  line-height: 0.75em;
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal; }
+  @media (min-width: 576px) {
+    .font-bit-xxl {
       font-size: 60px; } }
+  @media (min-width: 768px) {
+    .font-bit-xxl {
+      font-size: 60px; } }
+  @media (min-width: 992px) {
+    .font-bit-xxl {
+      font-size: 60px; } }
+  @media (min-width: 1200px) {
+    .font-bit-xxl {
+      font-size: 75px; } }
 
 .font-sans-m {
   font-family: "Graphik", sans-serif;
@@ -161,7 +182,7 @@ html body input:-internal-autofill-selected {
 */
 body.schedule-open section#ui #home #now-playing-small {
   opacity: 1;
-  left: calc(30px - 70px);
+  left: 20px;
   pointer-events: all; }
   @media (max-width: 1199.98px) {
     body.schedule-open section#ui #home #now-playing-small {
@@ -200,7 +221,7 @@ a {
     height: 200px;
     width: 200px;
     font-family: "NeueBit", monospace;
-    font-size: 50px;
+    font-size: 40px;
     letter-spacing: 0;
     line-height: 0.75em;
     font-weight: 700;
@@ -213,16 +234,16 @@ a {
     transition: background-color 400ms; }
     @media (min-width: 576px) {
       a.huge-button {
-        font-size: 50px; } }
+        font-size: 40px; } }
     @media (min-width: 768px) {
       a.huge-button {
-        font-size: 50px; } }
+        font-size: 40px; } }
     @media (min-width: 992px) {
       a.huge-button {
-        font-size: 50px; } }
+        font-size: 40px; } }
     @media (min-width: 1200px) {
       a.huge-button {
-        font-size: 60px; } }
+        font-size: 54px; } }
     a.huge-button:hover {
       background-color: #FA7935;
       color: black; }
@@ -323,6 +344,9 @@ a {
 .hover-purple:hover {
   color: #8197FF; }
 
+.hover-white:hover {
+  color: white; }
+
 .upper {
   text-transform: uppercase; }
 
@@ -383,6 +407,8 @@ section#ui {
     @media (max-width: 1199.98px) {
       section#ui div.column {
         min-width: 60px; } }
+    section#ui div.column[id^='channel-'] .title.active {
+      color: #FA7935; }
     section#ui div.column.expanded {
       min-width: calc(70px + 500px); }
       @media (max-width: 1199.98px) {
@@ -401,7 +427,7 @@ section#ui {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px; }
+      padding: 0 20px 0 30px; }
       @media (max-width: 1199.98px) {
         section#ui div.column .rotated-bar {
           height: 60px; } }
@@ -437,13 +463,13 @@ section#ui {
       right: 0;
       height: 70px;
       width: 70px;
-      color: white;
+      color: rgba(255, 255, 255, 0.5);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       opacity: 0;
       font-family: "NeueBit", monospace;
-      font-size: 50px;
+      font-size: 40px;
       letter-spacing: 0;
       line-height: 0.75em;
       font-weight: 700;
@@ -458,18 +484,20 @@ section#ui {
         section#ui #home .close-programs {
           height: 60px;
           width: 60px; } }
+      section#ui #home .close-programs:hover {
+        color: white; }
       @media (min-width: 576px) {
         section#ui #home .close-programs {
-          font-size: 50px; } }
+          font-size: 40px; } }
       @media (min-width: 768px) {
         section#ui #home .close-programs {
-          font-size: 50px; } }
+          font-size: 40px; } }
       @media (min-width: 992px) {
         section#ui #home .close-programs {
-          font-size: 50px; } }
+          font-size: 40px; } }
       @media (min-width: 1200px) {
         section#ui #home .close-programs {
-          font-size: 60px; } }
+          font-size: 54px; } }
     section#ui #home .highlight-container {
       position: fixed;
       top: 0;
@@ -478,7 +506,7 @@ section#ui {
       left: 0;
       display: flex;
       align-items: flex-end;
-      padding-bottom: 20px;
+      padding-bottom: 30px;
       justify-content: center; }
       @media (max-width: 991.98px) {
         section#ui #home .highlight-container {
@@ -501,7 +529,7 @@ section#ui {
       align-items: center;
       justify-content: center;
       font-family: "NeueBit", monospace;
-      font-size: 50px;
+      font-size: 40px;
       letter-spacing: 0;
       line-height: 0.75em;
       font-weight: 700;
@@ -517,21 +545,21 @@ section#ui {
           position: absolute; } }
       @media (min-width: 576px) {
         section#ui #home .watch {
-          font-size: 50px; } }
+          font-size: 40px; } }
       @media (min-width: 768px) {
         section#ui #home .watch {
-          font-size: 50px; } }
+          font-size: 40px; } }
       @media (min-width: 992px) {
         section#ui #home .watch {
-          font-size: 50px; } }
+          font-size: 40px; } }
       @media (min-width: 1200px) {
         section#ui #home .watch {
-          font-size: 60px; } }
+          font-size: 54px; } }
     section#ui #home #now-playing-small {
       position: absolute;
       bottom: 30px;
       opacity: 0;
-      left: 0;
+      left: 40px;
       pointer-events: none;
       max-width: 30vw;
       -webkit-transition: opacity 400ms, left 400ms;
@@ -554,10 +582,18 @@ section#ui {
 
 #bottom-left {
   position: fixed;
-  bottom: 20px;
+  bottom: 30px;
   left: 20px; }
   @media (max-width: 991.98px) {
     #bottom-left {
       display: none; } }
+  #bottom-left .logan-logo {
+    max-width: 15vw; }
+
+#top-left {
+  position: fixed;
+  z-index: 2;
+  top: 20px;
+  left: 20px; }
 
 /*# sourceMappingURL=index.css.map */
