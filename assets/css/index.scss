@@ -13,8 +13,9 @@ $purple: #8197FF;
 $space: 20px;
 $col-w-xl: 70px;
 $col-w-lg: 60px;
-$schedule-w-xl: 360px;
-$schedule-w-lg: 300px;
+$schedule-w-xl: 500px;
+$schedule-w-lg: 350px;
+$schedule-w-lg: 50vw;
 
 // ------------------------------------------------------------------------
 // External files import
@@ -32,6 +33,22 @@ $schedule-w-lg: 300px;
 * {
 }
 body {
+  &.schedule-open {
+    section#ui #home {
+      #now-playing-small {
+        opacity: 1;
+        left: calc(#{$space * 1.5} - #{$col-w-xl});
+        @include media-breakpoint-down(lg) { left: calc(#{$space} - #{$col-w-lg}); }
+        pointer-events: all;
+      }
+      .highlight { opacity: 0; }
+      .close-programs { opacity: 1; }
+    }
+    #bottom-left {
+      pointer-events: none;
+      opacity: 0;
+    }
+  }
   &.watching {
     section#bg {
       div#bg-video {
@@ -49,6 +66,10 @@ body {
       pointer-events: all;
       opacity: 1;
     }
+    #bottom-left {
+      pointer-events: none;
+      opacity: 0;
+    }
   }
 
   main {
@@ -58,13 +79,12 @@ body {
 
 a {
 	cursor: pointer;
+  text-decoration: none;
   &.huge-button {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    border: solid $orange;
-    border-width: 2px;
-
+    border: solid $orange 2px;
     color: $orange;
     text-decoration: none;
     border-radius: 100px;
@@ -78,21 +98,21 @@ a {
     }
   }
   &.button {
+    $butt-h: 28px;
     display: inline-flex;
-    height: 40px;
     justify-content: center;
     align-items: center;
-    background-color: $orange;
-    color: black;
+    border: solid $orange 2px;
+    color: $orange;
     text-decoration: none;
-    padding: 0 15px;
-    margin-right: 5px;
-    margin-top: 5px;
-    min-width: 250px;
-    @include font-sans-m;
+    border-radius: $butt-h/2;
+    height: $butt-h;
+    padding: 1px 20px 0;
+    @include font-sans-s;
     @include transition(background-color 400ms);
     &:hover {
-      background-color: darken($red, 5%);
+      background-color: $orange;
+      color: black;
     }
     &.external {
       &::before {
@@ -103,20 +123,45 @@ a {
   }
 }
 
+$scn-size: 1.3em;
+.small-channel-num {
+  @include font-bit-l;
+  color: $orange;
+  font-size: 1.4em !important;
+  display: inline-flex;
+  border: 2px solid #FA7936;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: -.05em;
+  padding-top: .15em;
+
+  border-radius: $scn-size/2;
+  width: $scn-size;
+  height: $scn-size;
+  max-width: $scn-size;
+  max-height: $scn-size;
+  min-width: $scn-size;
+  min-height: $scn-size;
+
+  margin-right: 0.3em;
+}
 
 // ------------------------------------------------------------------------
 // Utilities
 // ------------------------------------------------------------------------
 
-.color-white  { color: white; }
-.color-grey   { color: #ABABAB; }
-.color-purple { color: $purple; }
-.color-orange { color: $orange; }
-.upper        { text-transform: uppercase; }
-.blurred      { filter: blur(1vh); }
-.font-bold    { font-weight: 700; }
-.max-text-w   { max-width: 9em; }
-.vspace       { height: $space; }
+.color-white        { color: white; }
+.color-white-50     { color: rgba(255,255,255, 0.5); }
+.color-grey         { color: #ABABAB; }
+.color-purple       { color: $purple; }
+.color-orange       { color: $orange; }
+.hover-purple:hover { color: $purple; }
+.upper              { text-transform: uppercase; }
+.blurred            { filter: blur(1vh); }
+.font-bold          { font-weight: 700; }
+.max-text-w         { max-width: 9em; }
+.vspace             { height: $space; }
 
 // ------------------------------------------------------------------------
 // Grid
@@ -216,10 +261,10 @@ section#ui {
   }
   #home {
     flex-grow: 1;
-    display: flex;
-    align-items: flex-end;
-    padding-bottom: $space;
-    justify-content: center;
+    // display: flex;
+    // align-items: flex-end;
+    // padding-bottom: $space;
+    // justify-content: center;
     position: relative;
 
     .close-programs {
@@ -241,26 +286,41 @@ section#ui {
       @include transition(opacity 400ms);
     }
 
-    &.hidden {
-      // flex-grow: 0;
-      .highlight { opacity: 0; }
-      .close-programs { opacity: 1; }
-    }
-    
-    .highlight {
-      @include transition(opacity 400ms);
-      text-align: center;
+    .highlight-container {
+      position: fixed;
+      @include media-breakpoint-down(md) { position: absolute; }
+      top: 0; right: 0; bottom: 0; left: 0;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: $space;
+      justify-content: center;
+      .highlight {
+        @include transition(opacity 400ms);
+        text-align: center;
+      }
     }
 
     .watch {
-      position: absolute;
-      opacity: 1;
+      position: fixed;
+      @include media-breakpoint-down(md) { position: absolute; }
       top: 0; right: 0; bottom: 0; left: 0;
+      opacity: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       @include font-bit-xl;
       @include transition(opacity 400ms);
+    }
+
+    #now-playing-small {
+      position: absolute; 
+      bottom: $space * 1.5;
+      opacity: 0;
+      left: 0;
+      pointer-events: none;
+      // margin-right: 33%;
+      max-width: 30vw;
+      @include transition(opacity 400ms, left 400ms);
     }
   }
 }
@@ -268,9 +328,18 @@ section#ui {
 #logo-watching {
   pointer-events: none;
   opacity: 0;
+  position: fixed; 
+  top: $space; 
+  left: $space;
   @include transition(opacity 400ms);
 }
 
+#bottom-left {
+  position: fixed;
+  bottom: $space;
+  left: $space;
+  @include media-breakpoint-down(md) { display: none; }
+}
 
 
 // ------------------------------------------------------------------------

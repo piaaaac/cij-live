@@ -11,7 +11,7 @@ $template = $channel->template()->name();
 $onChannelClick = "";
 if ($template == "channel") {
 	$firstVideo = $channel->videoList()->toPages()->first();
-	$onChannelClick = "onclick=\"a.changeVideo('". $firstVideo->vimeo()->value() ."', '". $firstVideo->title() ."');\"";
+	$onChannelClick = "onclick=\"a.changeVideo('". $firstVideo->vimeo()->value() ."', '". $firstVideo->title() ."', '". $index ."');\"";
 } elseif ($template == "channel-stream") {
 	$onChannelClick = "onclick=\"alert('Live stream will start.');\"";
 }
@@ -65,9 +65,18 @@ if ($template == "channel") {
 				<div class="schedule-item">
 					<div class="left">
 						<p class="font-sans-s color-purple mb-2 pb-1"><?= $v->programType()->upper() ?></p>
+
+						<!--  
 						<a class="font-sans-m color-white clickable-title"
-							onclick="a.changeVideo('<?= $v->vimeo()->value() ?>', '<?=$v->title() ?>', true);"
+							onclick="a.changeVideo('<?= $v->vimeo()->value() ?>', '<?=$v->title() ?>', '<?= $index ?>', true);"
 						><?= $v->title() ?></a>
+						-->
+						
+						<p class="font-sans-m color-white"><?= $v->title() ?></p>
+						<p class="mt-2 pt-2"><a class="button"
+									onclick="a.changeVideo('<?= $v->vimeo()->value() ?>', '<?=$v->title() ?>', '<?= $index ?>', true);">
+									WATCH NOW</a></p>
+
 					</div>
 					<div class="right">
 						<p class="font-sans-s color-purple mb-2 pb-1">INFO</p>

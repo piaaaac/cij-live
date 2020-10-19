@@ -9,6 +9,7 @@ function App () {
   this.videoHeight = null;
   this.videoId = null;
   this.videoTitle = null;
+  this.currentChannel = null;
 
   this.isPaused = false;
   this.isFullscreen = false;
@@ -21,21 +22,22 @@ function App () {
 
   this.home = function () { 
     this.colChannels.removeClass("expanded");
-    this.colHome.removeClass("hidden");
+    $("body").removeClass("schedule-open");
   }
 
   this.toggleSchedule = function (id) { 
     var thisCol = $(".column#"+ id);
 
     if (thisCol.hasClass("expanded")) {
-      thisCol.removeClass("expanded");
+      // thisCol.removeClass("expanded");
+      this.home();
     } else {
       this.colChannels.removeClass("expanded");
       thisCol.addClass("expanded");
     }
 
     var anyChannelOpen = $(".column[id^='channel-'].expanded").length > 0;
-    this.colHome.toggleClass("hidden", anyChannelOpen);
+    $("body").toggleClass("schedule-open", anyChannelOpen);
   }
 
   this.setMode = function (newMode) {
@@ -54,6 +56,8 @@ function App () {
       this.player.setMuted(true);
       $("body").removeClass("watching");
       this.videoContainer.css({ "transform": "scale("+ this.scaleFactor +")" });
+      this.player.pause();
+      this.isPaused = true;
 
     } else if (this.mode == "watching") {
 
@@ -66,7 +70,7 @@ function App () {
     }
   }
 
-  this.initBgVideo = function (id, title, startWatching) {
+  this.initBgVideo = function (id, title, channelNum, startWatching) {
 
     var options = {
         id: id,
@@ -91,7 +95,10 @@ function App () {
     
     this.videoId = id;
     this.videoTitle = title;
+    this.currentChannel = channelNum;
     $("#home .highlight .title").text(title);
+    $("#now-playing-small .title").text(title);
+    $(".small-channel-num").text(channelNum);
 
     // --- Reset sizes
 
@@ -129,9 +136,9 @@ function App () {
     });
   }
 
-  this.changeVideo = function (id, title, startWatching) {
+  this.changeVideo = function (id, title, channelNum, startWatching) {
     this.player.destroy();
-    this.initBgVideo(id, title, startWatching);
+    this.initBgVideo(id, title, channelNum, startWatching);
   }
 
   this.handleResize = function () {
@@ -141,7 +148,7 @@ function App () {
     var that = this;
     this.player.getCurrentTime().then(function (time) {
       that.player.destroy();
-      that.initBgVideo(that.videoId, that.videoTitle);
+      that.initBgVideo(that.videoId, that.videoTitle, that.currentChannel);
       that.player.setCurrentTime(time);
     });
 
