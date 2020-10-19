@@ -7,29 +7,35 @@ function App () {
   this.mode = "navigation";
   this.videoWidth = null;
   this.videoHeight = null;
+  this.videoId = null;
+  this.videoTitle = null;
+
+  this.isPaused = false;
+  this.isFullscreen = false;
 
   this.player;
+  this.videoContainer = $("#bg-video");
   this.colLeft = $(".column#left");
-  this.colHome = $(".column#home");
-  this.colChannel1 = $(".column#channel-1");
-  this.colChannel2 = $(".column#channel-2");
-  this.colChannel3 = $(".column#channel-3");
+  this.colHome = $("#home");
+  this.colChannels = $(".column[id^='channel-']");
 
   this.home = function () { 
-    this.colHome.removeClass("closed").addClass("expanded");
-    this.colChannel1.removeClass("closed").removeClass("expanded");
-    this.colChannel2.removeClass("closed").removeClass("expanded");
-    this.colChannel3.removeClass("closed").removeClass("expanded");
+    this.colChannels.removeClass("expanded");
+    this.colHome.removeClass("hidden");
   }
 
-  this.channels = function (ids) { 
-    this.colHome.removeClass("expanded").addClass("closed");
-    this.colChannel1.removeClass("closed").removeClass("expanded");
-    this.colChannel2.removeClass("closed").removeClass("expanded");
-    this.colChannel3.removeClass("closed").removeClass("expanded");
-    ids.forEach(function (e, i) {
-      $(".column#"+ e).addClass("expanded");
-    });
+  this.toggleSchedule = function (id) { 
+    var thisCol = $(".column#"+ id);
+
+    if (thisCol.hasClass("expanded")) {
+      thisCol.removeClass("expanded");
+    } else {
+      this.colChannels.removeClass("expanded");
+      thisCol.addClass("expanded");
+    }
+
+    var anyChannelOpen = $(".column[id^='channel-'].expanded").length > 0;
+    this.colHome.toggleClass("hidden", anyChannelOpen);
   }
 
   this.setMode = function (newMode) {
@@ -42,81 +48,101 @@ function App () {
       throw new Error('Unknown mode: '+ newMode);
     }
     this.mode = newMode;
+
     if (this.mode == "navigation") {
+
+      this.player.setMuted(true);
       $("body").removeClass("watching");
-      $("#bg-video").css({ "transform": "scale("+ this.scaleFactor +")" });
+      this.videoContainer.css({ "transform": "scale("+ this.scaleFactor +")" });
+
     } else if (this.mode == "watching") {
+
+      this.player.setMuted(false);
       $("body").addClass("watching");
-      $("#bg-video").css({ "transform": "scale(1)" });
+      this.videoContainer.css({ "transform": "scale(1)" });
       this.player.play();
+      this.isPaused = false;
+
     }
   }
 
-  this.initBgVideo = function (additionalOptions) {
+  this.initBgVideo = function (id, title, startWatching) {
 
     var options = {
-        // id: 458126085,
-        // autoplay: true,
-        muted: true,
-        // currentTime: 60,
+        id: id,
         width: $(window).width(),
         height: $(window).height(),
+        muted: true,
         title: false,
         byline: false,
         portrait: false,
         loop: true,
         color: "#8197FF",
-        controls: false
+        // controls: false,
+        // autoplay: true,
+        // currentTime: 60,
     };
 
-    if (additionalOptions) {
-      Object.assign(options, additionalOptions);
-    }
+    // --- Create Vimeo player
 
-    // Create bg video
-
-    // Will create inside the made-in-ny div:
-    // <iframe src="https://player.vimeo.com/video/59777392?loop=1" width="640" height="360" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
     this.player = new Vimeo.Player('bg-video', options);
-    // $("body").click();
-    // this.player.setCurrentTime(70);
+
+    // --- Update object & home UI
     
+    this.videoId = id;
+    this.videoTitle = title;
+    $("#home .highlight .title").text(title);
+
+    // --- Reset sizes
+
     var that = this;
     this.player.getVideoWidth().then(function (w) {
       that.videoWidth = w;
       that.player.getVideoHeight().then(function (h) {
         that.videoHeight = h;
-
         var w = $(window).width();
         var h = $(window).height();
         var screenRatio = w/h;
         var videoRatio = that.videoWidth/that.videoHeight;
         if (screenRatio > videoRatio) {
-          that.scaleFactor = that.videoWidth/w;
+          that.scaleFactor = screenRatio/videoRatio;
         } else {
-          that.scaleFactor = that.videoHeight/h;
+          that.scaleFactor = videoRatio/screenRatio;
         }
         if (that.mode == "navigation") {
-          $("#bg-video").css({ "transform": "scale("+ that.scaleFactor +")" });
+          that.videoContainer.css({ "transform": "scale("+ that.scaleFactor +")" });
+        }
+
+        if (that.mode == "watching") {
+          that.setMuted(false);
+        }
+
+        that.player.play();
+        that.isPaused = false;
+
+        if (startWatching) {
+          that.setMode("watching");
+          that.home();
         }
 
       });
     });
+  }
 
-
-    this.player.play();
-
+  this.changeVideo = function (id, title, startWatching) {
+    this.player.destroy();
+    this.initBgVideo(id, title, startWatching);
   }
 
   this.handleResize = function () {
+    if (this.isFullscreen) {
+      return;
+    }
     var that = this;
     this.player.getCurrentTime().then(function (time) {
-      that.player.getVideoId().then(function (id) {
-        debugger;
-        that.player.destroy();
-        that.initBgVideo({"id": id});
-        that.player.setCurrentTime(time);
-      });
+      that.player.destroy();
+      that.initBgVideo(that.videoId, that.videoTitle);
+      that.player.setCurrentTime(time);
     });
 
   }
@@ -136,6 +162,13 @@ $(window).resize(function () {
   a.handleResize();
 });
 
+$("iframe").click(function () {
+  setTimeout(function () {
+    console.log(this);
+    a.videoContainer.focus();
+  }, 100);
+});
+
 // -------------------------------------------
 // KEY BINDINGS
 // -------------------------------------------
@@ -145,7 +178,56 @@ document.addEventListener('keyup', function (event) {
     return; 
   }
   var key = event.key || event.keyCode;
+
+  // console.log("hit", key);
+
+  // --- ESC
+
   if (key === 'Escape' || key === 'Esc' || key === 27) {
-    a.setMode("navigation");
+    if (this.isFullscreen) {
+      a.isFullscreen = false;
+      a.exitFullscreen();
+    } else {
+      a.setMode("navigation");
+    }
   }
+
+  // --- SPACE
+
+  if (key === 'Space' || key === ' ' || key === 32) {
+    a.isPaused = !a.isPaused;
+    if (a.isPaused) {
+      a.player.pause();
+    } else {
+      a.player.play();
+    }
+  }
+
+  // --- F
+
+  if (key === 'f' || key === 70) {
+    a.isFullscreen = true;
+    a.player.requestFullscreen();
+  }
+
+  // --- Enter
+
+  if (key === 'Enter' || key === 13) {
+    a.setMode("watching");
+  }
+
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+

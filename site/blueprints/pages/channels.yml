@@ -1,0 +1,19 @@
+title: Channels
+
+options:
+  changeStatus: false
+
+sections:
+
+  livestream:
+    headline: Live stream channel
+    type: pages
+    templates: channel-stream
+    max: 1
+    min: 1
+
+  ondemand:
+    headline: Channels
+    type: pages
+    templates: channel
+    # info: "{{ page.channelType.upper }}"

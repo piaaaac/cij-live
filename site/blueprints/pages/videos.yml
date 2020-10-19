@@ -1,0 +1,18 @@
+title: Videos
+
+options:
+  changeStatus: false
+
+sections:
+
+  notyetrecorded:
+    headline: New videos
+    type: pages
+    templates: video
+    status: draft
+
+  prerecorded:
+    headline: Recorded videos
+    type: pages
+    templates: video
+    status: published

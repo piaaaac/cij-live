@@ -1,0 +1,54 @@
+title: Video
+preset: page
+pages: false
+files: false
+
+status:
+  draft:
+    label: New video
+    text: The video is scheduled live in the future
+  unlisted:
+    label: Recorded
+    text: The video is available on Vimeo
+
+
+fields:
+
+  programType:
+    label: Program type
+    type: select
+    default: talk
+    options:
+      talk: Talk
+      panel: Panel
+      seminar: Seminar
+      screening: Screening
+      discussion: Discussion
+    required: true
+
+  vimeo:
+    label: Vimeo id
+    type: text
+    required: true
+
+  # img:
+  #   label: Preview image
+  #   type: files
+  #   min: 0
+  #   max: 1
+
+  description: 
+    label: Description
+    type: textarea
+    size: tiny
+
+  # topics:
+  #   label: Topics
+  #   type: tags
+  #   options: query
+  #   query: site.find('videos').childrenAndDrafts.pluck("topics", ",", true)
+
+  # people:
+  #   label: People
+  #   type: pages
+  #   query: site.find('people').childrenAndDrafts

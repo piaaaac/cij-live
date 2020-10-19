@@ -1,0 +1,25 @@
+Title: Sessions
+
+----
+
+Videolist:
+
+- >
+  videos/investigating-state-brutality-blaming-the-messenger
+- >
+  videos/conversation-the-new-intermediaries
+- videos/opening-plenary
+- >
+  videos/statement-by-rui-pinto-stella-morris
+
+----
+
+Streaminfo: 
+
+----
+
+Channeltype: videos
+
+----
+
+Video: 

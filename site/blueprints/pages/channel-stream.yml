@@ -1,0 +1,58 @@
+title: Channel (live stream)
+preset: page
+pages: false
+files: false
+
+fields:
+
+  streamInfo:
+    label: Stream Url or something
+    type: text
+
+  schedule:
+    type: structure
+    label: Schedule
+    fields:
+      
+      videoItem:
+        label: Video
+        type: pages
+        query: site.find('videos').drafts
+        min: 1
+        max: 1
+
+      # itemTitle: 
+      #   label: Title
+      #   type: text
+    
+      # itemLabel: 
+      #   label: Label
+      #   type: text
+    
+      # itemType:
+      #   label: Program type
+      #   type: select
+      #   default: talk
+      #   options:
+      #     talk: Talk
+      #     panel: Panel
+      #     seminar: Seminar
+      #     screening: Screening
+      #     discussion: Discussion
+      #   required: true
+
+      itemDate:
+        label: Date
+        type: date
+
+      itemTimeFrom:
+        label: Time from
+        type: time
+        width: 1/2
+
+      itemTimeTo:
+        label: Time to
+        type: time
+        width: 1/2
+
+

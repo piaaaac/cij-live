@@ -11,7 +11,10 @@ $orange: #FA7935;
 $purple: #8197FF;
 
 $space: 20px;
-$col-w: 70px;
+$col-w-xl: 70px;
+$col-w-lg: 60px;
+$schedule-w-xl: 360px;
+$schedule-w-lg: 300px;
 
 // ------------------------------------------------------------------------
 // External files import
@@ -40,6 +43,11 @@ body {
     section#ui {
       pointer-events: none;
       opacity: 0;
+      
+    }
+    #logo-watching {
+      pointer-events: all;
+      opacity: 1;
     }
   }
 
@@ -50,6 +58,25 @@ body {
 
 a {
 	cursor: pointer;
+  &.huge-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: solid $orange;
+    border-width: 2px;
+
+    color: $orange;
+    text-decoration: none;
+    border-radius: 100px;
+    height: 200px;
+    width: 200px;
+    @include font-bit-xl;
+    @include transition(background-color 400ms);
+    &:hover {
+      background-color: $orange;
+      color: black;
+    }
+  }
   &.button {
     display: inline-flex;
     height: 40px;
@@ -102,9 +129,12 @@ section#bg {
     position: fixed;
     top: 0; bottom: 0; left: 0; right: 0;
     opacity: 0.3;
-    transform: scale(5);
+    // transform: scale(2);
     filter: blur(1vh);
-    @include transition(filter 400ms, transform 400ms);
+    @include transition(filter 400ms, transform 800ms);
+    iframe {
+      // pointer-events: none;
+    }
   }
 }
 
@@ -119,28 +149,34 @@ section#ui {
   justify-content: flex-start;
 
   div.column {
-    // width: $col-w;
-    min-width: $col-w;
-    // border: 1px solid grey;
+    min-width: $col-w-xl;
+    @include media-breakpoint-down(lg) { min-width: $col-w-lg; }
+    position: relative;
     @include transition(flex-grow 400ms, min-width 400ms);
     overflow: hidden;
-    border-right: 1px solid rgba(255,255,255, 0.2);
+    border-left: 1px solid rgba(255,255,255, 0.2);
 
     &.expanded {
-      // width: 100%;
-      flex-grow: 1;
+      min-width: calc(#{$col-w-xl} + #{$schedule-w-xl});
+      @include media-breakpoint-down(lg) { min-width: calc(#{$col-w-lg} + #{$schedule-w-lg}); }
+
+      .rotated-bar .arrow::after {
+        content: "↑";
+        content: "↓";
+      }
     }
 
-    &.closed {
-      min-width: 0;
-      flex-grow: 0;
-      width: 0;
-    }
+    // &.closed {
+    //   min-width: 0;
+    //   flex-grow: 0;
+    //   width: 0;
+    // }
 
     .rotated-bar {
       transform: rotate(-90deg);
       transform-origin: 50vh 50vh;
-      height: $col-w;
+      height: $col-w-xl;
+      @include media-breakpoint-down(lg) { height: $col-w-lg; }
       width: 100vh;
       position: absolute;
       top: 0;
@@ -148,17 +184,91 @@ section#ui {
       align-items: center;
       justify-content: space-between;
       padding: 0 $space;
-    }
-
-    &#home {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      .highlight {
-        text-align: center;
+      .arrow::after {
+        content: "↓";
+        content: "↑";
       }
     }
+
+    .schedule {
+      position: absolute;
+      width: $schedule-w-xl;
+      @include media-breakpoint-down(lg) { width: $schedule-w-lg; }
+      top: 0; height: 100vh;
+      left: $col-w-xl;
+      overflow-y: scroll;
+      
+      .schedule-item {
+        border-top: 1px solid rgba(255,255,255, 0.2);
+        padding-top: $space;
+        padding-right: $space;
+        margin: $space 0 $space*3 10px;
+        display: flex;
+        
+        .left { flex-grow: 1; }
+
+        a.clickable-title {
+          &:hover { color: $orange; }
+        }
+      }
+    }
+
   }
+  #home {
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: $space;
+    justify-content: center;
+    position: relative;
+
+    .close-programs {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: $col-w-xl;
+      width: $col-w-xl;
+      @include media-breakpoint-down(lg) { 
+        height: $col-w-lg;
+        width: $col-w-lg;
+      }
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      @include font-bit-xl;
+      @include transition(opacity 400ms);
+    }
+
+    &.hidden {
+      // flex-grow: 0;
+      .highlight { opacity: 0; }
+      .close-programs { opacity: 1; }
+    }
+    
+    .highlight {
+      @include transition(opacity 400ms);
+      text-align: center;
+    }
+
+    .watch {
+      position: absolute;
+      opacity: 1;
+      top: 0; right: 0; bottom: 0; left: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      @include font-bit-xl;
+      @include transition(opacity 400ms);
+    }
+  }
+}
+
+#logo-watching {
+  pointer-events: none;
+  opacity: 0;
+  @include transition(opacity 400ms);
 }
 
 

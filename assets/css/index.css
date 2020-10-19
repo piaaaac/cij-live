@@ -62,44 +62,44 @@ html body input:-internal-autofill-selected {
   font-family: Graphik;
   font-weight: 500;
   src: url("../fonts/Graphik-Medium.otf") format("opentype"); }
-.font-bit-xxl {
+.font-bit-l {
   font-family: "NeueBit", monospace;
-  font-size: 90px;
+  font-size: 30px;
   letter-spacing: 0;
-  line-height: 0.7em;
+  line-height: 0.75em;
   font-weight: 700;
   font-style: normal;
   font-stretch: normal; }
   @media (min-width: 576px) {
-    .font-bit-xxl {
-      font-size: 90px; } }
+    .font-bit-l {
+      font-size: 30px; } }
   @media (min-width: 768px) {
-    .font-bit-xxl {
-      font-size: 90px; } }
+    .font-bit-l {
+      font-size: 30px; } }
   @media (min-width: 992px) {
-    .font-bit-xxl {
-      font-size: 90px; } }
+    .font-bit-l {
+      font-size: 30px; } }
   @media (min-width: 1200px) {
-    .font-bit-xxl {
-      font-size: 90px; } }
+    .font-bit-l {
+      font-size: 40px; } }
 
 .font-bit-xl {
   font-family: "NeueBit", monospace;
-  font-size: 60px;
+  font-size: 50px;
   letter-spacing: 0;
-  line-height: 1.3em;
+  line-height: 0.75em;
   font-weight: 700;
   font-style: normal;
   font-stretch: normal; }
   @media (min-width: 576px) {
     .font-bit-xl {
-      font-size: 60px; } }
+      font-size: 50px; } }
   @media (min-width: 768px) {
     .font-bit-xl {
-      font-size: 60px; } }
+      font-size: 50px; } }
   @media (min-width: 992px) {
     .font-bit-xl {
-      font-size: 60px; } }
+      font-size: 50px; } }
   @media (min-width: 1200px) {
     .font-bit-xl {
       font-size: 60px; } }
@@ -125,6 +125,27 @@ html body input:-internal-autofill-selected {
     .font-sans-m {
       font-size: 18px; } }
 
+.font-sans-s {
+  font-family: "Graphik", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 18px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal; }
+  @media (min-width: 576px) {
+    .font-sans-s {
+      font-size: 14px; } }
+  @media (min-width: 768px) {
+    .font-sans-s {
+      font-size: 14px; } }
+  @media (min-width: 992px) {
+    .font-sans-s {
+      font-size: 14px; } }
+  @media (min-width: 1200px) {
+    .font-sans-s {
+      font-size: 14px; } }
+
 /* USAGE 
 @include keyframes(slide-down) {
   0% { opacity: 1; }
@@ -144,9 +165,50 @@ body.watching section#bg div#bg-video {
 body.watching section#ui {
   pointer-events: none;
   opacity: 0; }
+body.watching #logo-watching {
+  pointer-events: all;
+  opacity: 1; }
 
 a {
   cursor: pointer; }
+  a.huge-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: solid #FA7935;
+    border-width: 2px;
+    color: #FA7935;
+    text-decoration: none;
+    border-radius: 100px;
+    height: 200px;
+    width: 200px;
+    font-family: "NeueBit", monospace;
+    font-size: 50px;
+    letter-spacing: 0;
+    line-height: 0.75em;
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    -webkit-transition: background-color 400ms;
+    -moz-transition: background-color 400ms;
+    -ms-transition: background-color 400ms;
+    -o-transition: background-color 400ms;
+    transition: background-color 400ms; }
+    @media (min-width: 576px) {
+      a.huge-button {
+        font-size: 50px; } }
+    @media (min-width: 768px) {
+      a.huge-button {
+        font-size: 50px; } }
+    @media (min-width: 992px) {
+      a.huge-button {
+        font-size: 50px; } }
+    @media (min-width: 1200px) {
+      a.huge-button {
+        font-size: 60px; } }
+    a.huge-button:hover {
+      background-color: #FA7935;
+      color: black; }
   a.button {
     display: inline-flex;
     height: 40px;
@@ -226,13 +288,12 @@ section#bg {
     left: 0;
     right: 0;
     opacity: 0.3;
-    transform: scale(5);
     filter: blur(1vh);
-    -webkit-transition: filter 400ms, transform 400ms;
-    -moz-transition: filter 400ms, transform 400ms;
-    -ms-transition: filter 400ms, transform 400ms;
-    -o-transition: filter 400ms, transform 400ms;
-    transition: filter 400ms, transform 400ms; }
+    -webkit-transition: filter 400ms, transform 800ms;
+    -moz-transition: filter 400ms, transform 800ms;
+    -ms-transition: filter 400ms, transform 800ms;
+    -o-transition: filter 400ms, transform 800ms;
+    transition: filter 400ms, transform 800ms; }
 
 section#ui {
   position: fixed;
@@ -251,19 +312,25 @@ section#ui {
   justify-content: flex-start; }
   section#ui div.column {
     min-width: 70px;
+    position: relative;
     -webkit-transition: flex-grow 400ms, min-width 400ms;
     -moz-transition: flex-grow 400ms, min-width 400ms;
     -ms-transition: flex-grow 400ms, min-width 400ms;
     -o-transition: flex-grow 400ms, min-width 400ms;
     transition: flex-grow 400ms, min-width 400ms;
     overflow: hidden;
-    border-right: 1px solid rgba(255, 255, 255, 0.2); }
+    border-left: 1px solid rgba(255, 255, 255, 0.2); }
+    @media (max-width: 1199.98px) {
+      section#ui div.column {
+        min-width: 60px; } }
     section#ui div.column.expanded {
-      flex-grow: 1; }
-    section#ui div.column.closed {
-      min-width: 0;
-      flex-grow: 0;
-      width: 0; }
+      min-width: calc(70px + 360px); }
+      @media (max-width: 1199.98px) {
+        section#ui div.column.expanded {
+          min-width: calc(60px + 300px); } }
+      section#ui div.column.expanded .rotated-bar .arrow::after {
+        content: "↑";
+        content: "↓"; }
     section#ui div.column .rotated-bar {
       transform: rotate(-90deg);
       transform-origin: 50vh 50vh;
@@ -275,11 +342,131 @@ section#ui {
       align-items: center;
       justify-content: space-between;
       padding: 0 20px; }
-    section#ui div.column#home {
-      display: flex;
+      @media (max-width: 1199.98px) {
+        section#ui div.column .rotated-bar {
+          height: 60px; } }
+      section#ui div.column .rotated-bar .arrow::after {
+        content: "↓";
+        content: "↑"; }
+    section#ui div.column .schedule {
+      position: absolute;
+      width: 360px;
+      top: 0;
+      height: 100vh;
+      left: 70px;
+      overflow-y: scroll; }
+      @media (max-width: 1199.98px) {
+        section#ui div.column .schedule {
+          width: 300px; } }
+      section#ui div.column .schedule .schedule-item {
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-top: 20px;
+        padding-right: 20px;
+        margin: 20px 0 60px 10px;
+        display: flex; }
+        section#ui div.column .schedule .schedule-item .left {
+          flex-grow: 1; }
+        section#ui div.column .schedule .schedule-item a.clickable-title:hover {
+          color: #FA7935; }
+  section#ui #home {
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 20px;
+    justify-content: center;
+    position: relative; }
+    section#ui #home .close-programs {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 70px;
+      width: 70px;
+      color: white;
+      display: inline-flex;
       align-items: center;
-      justify-content: center; }
-      section#ui div.column#home .highlight {
-        text-align: center; }
+      justify-content: center;
+      opacity: 0;
+      font-family: "NeueBit", monospace;
+      font-size: 50px;
+      letter-spacing: 0;
+      line-height: 0.75em;
+      font-weight: 700;
+      font-style: normal;
+      font-stretch: normal;
+      -webkit-transition: opacity 400ms;
+      -moz-transition: opacity 400ms;
+      -ms-transition: opacity 400ms;
+      -o-transition: opacity 400ms;
+      transition: opacity 400ms; }
+      @media (max-width: 1199.98px) {
+        section#ui #home .close-programs {
+          height: 60px;
+          width: 60px; } }
+      @media (min-width: 576px) {
+        section#ui #home .close-programs {
+          font-size: 50px; } }
+      @media (min-width: 768px) {
+        section#ui #home .close-programs {
+          font-size: 50px; } }
+      @media (min-width: 992px) {
+        section#ui #home .close-programs {
+          font-size: 50px; } }
+      @media (min-width: 1200px) {
+        section#ui #home .close-programs {
+          font-size: 60px; } }
+    section#ui #home.hidden .highlight {
+      opacity: 0; }
+    section#ui #home.hidden .close-programs {
+      opacity: 1; }
+    section#ui #home .highlight {
+      -webkit-transition: opacity 400ms;
+      -moz-transition: opacity 400ms;
+      -ms-transition: opacity 400ms;
+      -o-transition: opacity 400ms;
+      transition: opacity 400ms;
+      text-align: center; }
+    section#ui #home .watch {
+      position: absolute;
+      opacity: 1;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "NeueBit", monospace;
+      font-size: 50px;
+      letter-spacing: 0;
+      line-height: 0.75em;
+      font-weight: 700;
+      font-style: normal;
+      font-stretch: normal;
+      -webkit-transition: opacity 400ms;
+      -moz-transition: opacity 400ms;
+      -ms-transition: opacity 400ms;
+      -o-transition: opacity 400ms;
+      transition: opacity 400ms; }
+      @media (min-width: 576px) {
+        section#ui #home .watch {
+          font-size: 50px; } }
+      @media (min-width: 768px) {
+        section#ui #home .watch {
+          font-size: 50px; } }
+      @media (min-width: 992px) {
+        section#ui #home .watch {
+          font-size: 50px; } }
+      @media (min-width: 1200px) {
+        section#ui #home .watch {
+          font-size: 60px; } }
+
+#logo-watching {
+  pointer-events: none;
+  opacity: 0;
+  -webkit-transition: opacity 400ms;
+  -moz-transition: opacity 400ms;
+  -ms-transition: opacity 400ms;
+  -o-transition: opacity 400ms;
+  transition: opacity 400ms; }
 
 /*# sourceMappingURL=index.css.map */

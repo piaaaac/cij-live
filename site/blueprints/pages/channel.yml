@@ -1,0 +1,30 @@
+title: Channel
+preset: page
+pages: false
+files: false
+
+fields:
+
+  videoList:
+    label: Video list
+    type: pages
+    query: site.find('videos').children
+    # when:
+    #   channelType: videos
+
+  # streamInfo:
+  #   label: Stream Url or something
+  #   type: text
+  #   when:
+  #     channelType: stream
+
+# sidebar:
+#   meta:
+#     type: fields
+#     fields:
+#       channelType:
+#         type: select
+#         default: videos
+#         options:
+#           videos: Videos
+#           stream: Live stream
