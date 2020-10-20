@@ -373,11 +373,11 @@ section#bg {
     right: 0;
     opacity: 0.3;
     filter: blur(1vh);
-    -webkit-transition: filter 400ms, transform 800ms;
-    -moz-transition: filter 400ms, transform 800ms;
-    -ms-transition: filter 400ms, transform 800ms;
-    -o-transition: filter 400ms, transform 800ms;
-    transition: filter 400ms, transform 800ms; }
+    -webkit-transition: filter 400ms, transform 400ms;
+    -moz-transition: filter 400ms, transform 400ms;
+    -ms-transition: filter 400ms, transform 400ms;
+    -o-transition: filter 400ms, transform 400ms;
+    transition: filter 400ms, transform 400ms; }
 
 section#ui {
   position: fixed;

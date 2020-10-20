@@ -177,7 +177,7 @@ section#bg {
     opacity: 0.3;
     // transform: scale(2);
     filter: blur(1vh);
-    @include transition(filter 400ms, transform 800ms);
+    @include transition(filter 400ms, transform 400ms);
     iframe {
       // pointer-events: none;
     }
