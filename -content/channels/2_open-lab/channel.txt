@@ -1,0 +1,27 @@
+Title: Open Lab
+
+----
+
+Videolist:
+
+- videos/test
+- >
+  videos/the-new-intermediaries-falling-through-the-cracks
+- >
+  videos/conversation-the-new-intermediaries
+- videos/opening-ceremony-trailer
+- videos/opening-plenary
+- >
+  videos/statement-by-rui-pinto-stella-morris
+
+----
+
+Streaminfo: 
+
+----
+
+Channeltype: videos
+
+----
+
+Video: 

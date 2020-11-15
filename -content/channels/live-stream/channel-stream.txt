@@ -1,0 +1,37 @@
+Title: Live stream
+
+----
+
+Streamid: 266314046
+
+----
+
+Streamactive: true
+
+----
+
+Schedule:
+
+- 
+  videoitem:
+    - videos/title-of-scheduled-video
+  itemdate: ""
+  itemtimefrom: ""
+  itemtimeto: ""
+  isactive: 'false'
+- 
+  videoitem:
+    - >
+      videos/the-new-intermediaries-falling-through-the-cracks-live
+  itemdate: 2020-11-16
+  itemtimefrom: 10:00
+  itemtimeto: 11:00
+  isactive: 'true'
+- 
+  videoitem:
+    - >
+      videos/investigating-state-brutality-blaming-the-messenger-live
+  itemdate: 2020-11-16
+  itemtimefrom: 12:00
+  itemtimeto: 13:00
+  isactive: 'true'

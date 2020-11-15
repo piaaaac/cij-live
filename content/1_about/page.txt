@@ -1,0 +1,13 @@
+Title: About CIJ Stream
+
+----
+
+Text:
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed turpis sed ipsum vehicula bibendum imperdiet in orci. In vel vestibulum nisi. Donec sagittis nunc id erat aliquam blandit. Ut in sapien magna.
+Nulla id mollis est. In non vestibulum dui, at malesuada quam. Phasellus fermentum tempor purus ac tincidunt. More information on the (link: https://tcij.org/logan-symposium/collective-intelligence/ text: Logan Symposyum 2020) website.
+
+---
+
+CIJ Stream is a collaboration between (link: https://tcij.org text: The Centre for Investigative Journalism) and (link: https://www.iam-internet.com/ text: IAM) for the 4th edition of the CIJ Logan Symposium. 
+This website was designed and built by (link: https://alexpiacentini.com text: Alex Piacentini).

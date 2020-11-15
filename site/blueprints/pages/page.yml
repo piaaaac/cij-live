@@ -1,0 +1,10 @@
+title: Page
+preset: page
+pages: false
+
+fields:
+
+  text:
+    label: Text
+    type: textarea
+    size: medium

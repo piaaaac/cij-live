@@ -2,7 +2,11 @@ Title: Live stream
 
 ----
 
-Streaminfo: 
+Streamid: 
+
+----
+
+Streamactive: false
 
 ----
 
@@ -10,15 +14,99 @@ Schedule:
 
 - 
   videoitem:
-    - >
-      videos/the-new-intermediaries-falling-through-the-cracks-live
+    - videos/opening-session
   itemdate: 2020-11-16
   itemtimefrom: 10:00
-  itemtimeto: 11:00
+  itemtimeto: 11:30
+  isactive: 'false'
+- 
+  videoitem:
+    - videos/the-new-intermediaries
+  itemdate: 2020-11-16
+  itemtimefrom: 13:00
+  itemtimeto: 14:00
+  isactive: 'false'
+- 
+  videoitem:
+    - videos/blowing-the-whistle
+  itemdate: 2020-11-16
+  itemtimefrom: 14:00
+  itemtimeto: 15:00
+  isactive: 'false'
 - 
   videoitem:
     - >
-      videos/investigating-state-brutality-blaming-the-messenger-live
+      videos/dissidence-exile-and-how-to-fight-for-truth-from-afar
   itemdate: 2020-11-16
+  itemtimefrom: 18:00
+  itemtimeto: 19:00
+  isactive: 'false'
+- 
+  videoitem:
+    - videos/blaming-the-messenger
+  itemdate: 2020-11-17
+  itemtimefrom: 12:30
+  itemtimeto: 14:00
+  isactive: 'false'
+- 
+  videoitem:
+    - videos/the-trial-of-golden-dawn
+  itemdate: 2020-11-17
+  itemtimefrom: 15:00
+  itemtimeto: 16:00
+  isactive: 'false'
+- 
+  videoitem:
+    - videos/opening-the-black-box
+  itemdate: 2020-11-17
+  itemtimefrom: 17:30
+  itemtimeto: 19:00
+  isactive: 'false'
+- 
+  videoitem:
+    - >
+      videos/digging-italy-doing-investigative-reporting-in-italy
+  itemdate: 2020-11-18
+  itemtimefrom: 11:00
+  itemtimeto: 12:00
+  isactive: 'false'
+- 
+  videoitem:
+    - videos/locking-down-debate
+  itemdate: 2020-11-18
+  itemtimefrom: 13:00
+  itemtimeto: 14:15
+  isactive: 'false'
+- 
+  videoitem:
+    - videos/investigating-islamism
+  itemdate: 2020-11-18
+  itemtimefrom: 17:00
+  itemtimeto: 18:15
+  isactive: 'false'
+- 
+  videoitem:
+    - videos/i-ve-been-hacked
+  itemdate: 2020-11-19
   itemtimefrom: 12:00
-  itemtimeto: 13:00
+  itemtimeto: 13:15
+  isactive: 'false'
+- 
+  videoitem:
+    - >
+      videos/follow-the-data-corruption-leaks-people-vs-power
+  itemdate: 2020-11-19
+  itemtimefrom: 14:00
+  itemtimeto: 15:15
+  isactive: 'false'
+- 
+  videoitem:
+    - videos/the-limits-of-foia
+  itemdate: 2020-11-19
+  itemtimefrom: 16:00
+  itemtimeto: 17:30
+  isactive: 'false'
+
+----
+
+Streaminfo: 

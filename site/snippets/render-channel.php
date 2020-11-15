@@ -10,10 +10,23 @@ $template = $channel->template()->name();
 
 $onChannelClick = "";
 if ($template == "channel") {
-	$firstVideo = $channel->videoList()->toPages()->first();
-	$onChannelClick = "onclick=\"a.changeVideo('". $firstVideo->vimeo()->value() ."', '". $firstVideo->title() ."', '". $index ."');\"";
+	
+	if ($channel->videoList()->toPages()->count() > 0) {
+		
+		$validItems = $channel->videoList()->toPages()->filter(function ($p) {
+			return $p->vimeo()->isNotEmpty();
+		});
+		
+		// $firstVideo = $channel->videoList()->toPages()->first();
+		$firstVideo = $validItems->first();
+
+		$onChannelClick = "onclick=\"a.changeVideo('". $firstVideo->vimeo()->value() ."', '". $firstVideo->title() ."', '". $index ."');\"";
+	}
 } elseif ($template == "channel-stream") {
-	$onChannelClick = "onclick=\"alert('Live stream will start.');\"";
+	// $onChannelClick = "onclick=\"alert('". $index ."');\"";
+	$vimeoId = $channel->streamId()->value();
+	$title = $channel->getFirstDraftVideo()->title()->value();
+	$onChannelClick = "onclick=\"a.changeVideo('". $vimeoId ."', '". $title ."', '". $index ."');\"";
 }
 ?>
 
@@ -22,7 +35,7 @@ if ($template == "channel") {
 		<a class="title font-bit-xl color-white" <?= $onChannelClick ?>>
 			<?= $index ?>&nbsp;&nbsp;&nbsp;<?= $channel->title() ?>
 		</a>
-		<a class="font-bit-xl color-white-50 hover-white" onclick="a.toggleSchedule('channel-<?= $index ?>');">
+		<a class="arrow-wrapper font-bit-xl color-white-50 hover-white" onclick="a.toggleSchedule('channel-<?= $index ?>');">
 			<span class="arrow "></span>
 		</a>
 	</div>
@@ -30,11 +43,20 @@ if ($template == "channel") {
 		
 		<?php if ($template == "channel-stream"): ?>
 		
+			<div class="schedule-title">
+				<h2 class="font-bit-xl color-white">Upcoming live sessions</h2>
+			</div>
+
 			<?php foreach ($channel->schedule()->toStructure() as $item): ?>
-				
+
 				<?php 
+				if ($item->isActive()->toBool() === false) {
+					continue;
+				}
 				$vId = $item->videoItem()->yaml()[0];
 				$v = kirby()->page($vId);
+				$descId = "desc-". $vId;
+				$descId = "ch-$index-" . str_replace("/", "-", $descId);
 				?>
 
 				<div class="schedule-item stream">
@@ -52,9 +74,12 @@ if ($template == "channel") {
 						<span class="font-sans-m color-white"
 							onclick="alert('Nothing here');"
 						><?= $v->title() ?></span>
+						<div class="description font-sans-m color-white" id="<?= $descId ?>"><?= $v->description()->kt() ?></div>
 					</div>
 					<div class="right">
-						<p class="font-sans-s color-purple mb-2 pb-1">INFO</p>
+						<?php if ($v->description()->isNotEmpty()): ?>
+							<p class="font-sans-s color-purple mb-2 pb-1"><a data-toggle-desc="<?= $descId ?>"></a></p>
+						<?php endif ?>
 					</div>
 				</div>
 			<?php endforeach ?>
@@ -62,6 +87,12 @@ if ($template == "channel") {
 		<?php elseif ($template == "channel"): ?>
 
 			<?php foreach ($channel->videoList()->toPages() as $v): ?>
+
+				<?php 
+				$descId = "desc-". $v->id();
+				$descId = "ch-$index-" . str_replace("/", "-", $descId);
+				?>
+
 				<div class="schedule-item">
 					<div class="left">
 						<p class="font-sans-s color-purple mb-2 pb-1"><?= $v->programType()->upper() ?></p>
@@ -73,13 +104,16 @@ if ($template == "channel") {
 						-->
 						
 						<p class="font-sans-m color-white"><?= $v->title() ?></p>
+						<div class="description font-sans-m color-white" id="<?= $descId ?>"><?= $v->description()->kt() ?></div>
 						<p class="mt-2 pt-2"><a class="button"
 									onclick="a.changeVideo('<?= $v->vimeo()->value() ?>', '<?=$v->title() ?>', '<?= $index ?>', true);">
 									WATCH NOW</a></p>
 
 					</div>
 					<div class="right">
-						<p class="font-sans-s color-purple mb-2 pb-1">INFO</p>
+						<?php if ($v->description()->isNotEmpty()): ?>
+							<p class="font-sans-s color-purple mb-2 pb-1"><a data-toggle-desc="<?= $descId ?>"></a></p>
+						<?php endif ?>
 					</div>
 				</div>
 			<?php endforeach ?>

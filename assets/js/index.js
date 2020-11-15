@@ -97,7 +97,9 @@ function App () {
     this.currentChannel = channelNum;
     $("#home .highlight .title").text(title);
     $("#now-playing-small .title").text(title);
+    $("#now-playing-watching .title").text(title);
     $(".small-channel-num").text(channelNum);
+    $(".watching-channel-num").text(channelNum);
     $("[id^='channel-'] .title").removeClass("active");
     $("#channel-"+ channelNum +" .title").addClass("active");
 
@@ -152,7 +154,18 @@ function App () {
       that.initBgVideo(that.videoId, that.videoTitle, that.currentChannel);
       that.player.setCurrentTime(time);
     });
+  }
 
+  this.toggleAbout = function (show) {
+    var doShow;
+    if (show === false) { 
+      doShow = false; 
+    } else if (show === true) {
+      doShow = true;
+    } else {
+      doShow = !$("body").hasClass("about");
+    }
+    $("body").toggleClass("about", doShow);
   }
 }
 
@@ -177,6 +190,23 @@ $("iframe").click(function () {
   }, 100);
 });
 
+$("a[data-toggle-desc]").click(function () {
+  var id = $(this).attr("data-toggle-desc");
+  var desc = $("#"+ id);
+  var doOpenThis = !desc.hasClass("open");
+
+  $(".description.open").removeClass("open").slideUp(200);
+  $("a[data-toggle-desc].open").removeClass("open");
+  if (desc.hasClass("open") && !doOpenThis) {
+    desc.removeClass("open").slideUp(200);
+    $(this).removeClass("open");
+  }
+  if (!desc.hasClass("open") && doOpenThis) {
+    desc.addClass("open").slideDown(200);
+    $(this).addClass("open");
+  }
+});
+
 // -------------------------------------------
 // KEY BINDINGS
 // -------------------------------------------
@@ -197,6 +227,7 @@ document.addEventListener('keyup', function (event) {
       a.exitFullscreen();
     } else {
       a.setMode("navigation");
+      a.toggleAbout(false);
     }
   }
 
@@ -224,10 +255,79 @@ document.addEventListener('keyup', function (event) {
     a.setMode("watching");
   }
 
+  // --- 1 2 3 4 5
+
+  if (key === '1' || key === 49) {
+    $("#channel-1 .title").click();
+  }
+  if (key === '2' || key === 50) {
+    $("#channel-2 .title").click();
+  }
+  if (key === '3' || key === 51) {
+    $("#channel-3 .title").click();
+  }
+  if (key === '4' || key === 52) {
+    $("#channel-4 .title").click();
+  }
+  if (key === '5' || key === 53) {
+    $("#channel-5 .title").click();
+  }
+
 });
 
 
+function icon (num) {
+  // var link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+  // link.type = 'image/x-icon';
+  // link.rel = 'shortcut icon';
+  // link.href = '/assets/favicon/'+ num +'/';
+  // document.getElementsByTagName('head')[0].appendChild(link);
 
+  var selectors = [
+    { sel: "link[rel='apple-touch-icon'][sizes='57x57']", attr: "href" },
+    { sel: "link[rel='apple-touch-icon'][sizes='60x60']", attr: "href" },
+    { sel: "link[rel='apple-touch-icon'][sizes='72x72']", attr: "href" },
+    { sel: "link[rel='apple-touch-icon'][sizes='76x76']", attr: "href" },
+    { sel: "link[rel='apple-touch-icon'][sizes='114x114']", attr: "href" },
+    { sel: "link[rel='apple-touch-icon'][sizes='120x120']", attr: "href" },
+    { sel: "link[rel='apple-touch-icon'][sizes='144x144']", attr: "href" },
+    { sel: "link[rel='apple-touch-icon'][sizes='152x152']", attr: "href" },
+    { sel: "link[rel='apple-touch-icon'][sizes='180x180']", attr: "href" },
+    { sel: "link[rel='icon'][sizes='192x192']", attr: "href" },
+    { sel: "link[rel='icon'][sizes='32x32']", attr: "href" },
+    { sel: "link[rel='icon'][sizes='96x96']", attr: "href" },
+    { sel: "link[rel='icon'][sizes='16x16']", attr: "href" },
+    { sel: "link[rel='manifest']", attr: "href" },
+    { sel: "meta[name='msapplication-TileImage']", attr: "content" },
+  ];
+
+  selectors.forEach(function (e, i) {
+    var tag = $(e.sel);
+    var currentValue = tag.attr(e.attr);
+    // console.log(e.sel, e.attr, currentValue);
+    var newValue = currentValue.replace(/favicon\/([0-9])\//g, "favicon/"+ num +"/");
+    console.log(newValue);
+    tag.attr(e.attt, newValue);
+
+  });
+  // $("link[rel='apple-touch-icon'][sizes='57x57']")     href="<?= $kirby->url('assets') ?>/favicon/1/apple-icon-57x57.png">
+  // $("link[rel='apple-touch-icon'][sizes='60x60']")     href="<?= $kirby->url('assets') ?>/favicon/1/apple-icon-60x60.png">
+  // $("link[rel='apple-touch-icon'][sizes='72x72']")     href="<?= $kirby->url('assets') ?>/favicon/1/apple-icon-72x72.png">
+  // $("link[rel='apple-touch-icon'][sizes='76x76']")     href="<?= $kirby->url('assets') ?>/favicon/1/apple-icon-76x76.png">
+  // $("link[rel='apple-touch-icon'][sizes='114x114']")   href="<?= $kirby->url('assets') ?>/favicon/1/apple-icon-114x114.png">
+  // $("link[rel='apple-touch-icon'][sizes='120x120']")   href="<?= $kirby->url('assets') ?>/favicon/1/apple-icon-120x120.png">
+  // $("link[rel='apple-touch-icon'][sizes='144x144']")   href="<?= $kirby->url('assets') ?>/favicon/1/apple-icon-144x144.png">
+  // $("link[rel='apple-touch-icon'][sizes='152x152']")   href="<?= $kirby->url('assets') ?>/favicon/1/apple-icon-152x152.png">
+  // $("link[rel='apple-touch-icon'][sizes='180x180']")   href="<?= $kirby->url('assets') ?>/favicon/1/apple-icon-180x180.png">
+  // $("link[rel='icon'][sizes='192x192']")               href="<?= $kirby->url('assets') ?>/favicon/1/android-icon-192x192.png">
+  // $("link[rel='icon'][sizes='32x32']")                 href="<?= $kirby->url('assets') ?>/favicon/1/favicon-32x32.png">
+  // $("link[rel='icon'][sizes='96x96']")                 href="<?= $kirby->url('assets') ?>/favicon/1/favicon-96x96.png">
+  // $("link[rel='icon'][sizes='16x16']")                 href="<?= $kirby->url('assets') ?>/favicon/1/favicon-16x16.png">
+  // $("link[rel='manifest']")                            href="<?= $kirby->url('assets') ?>/favicon/1/manifest.json">
+  // $("meta[name='msapplication-TileImage']")            content="<?= $kirby->url('assets') ?>/favicon/1/ms-icon-144x144.png">
+  // $("meta[name='theme-color']")                        content="#ffffff">
+
+}
 
 
 

@@ -16,4 +16,5 @@ sections:
     headline: Channels
     type: pages
     templates: channel
+    max: 4
     # info: "{{ page.channelType.upper }}"

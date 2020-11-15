@@ -1,21 +1,68 @@
 title: Site
-preset: page
-sections:
+# preset: page
+tabs:
 
-  list: 
-    type: pages
-    headline: Pages
-    status: published
-    templates: 
-      - channels
-      - videos
+  pages:
+    label: Pages
+    sections:
 
-  # homeHighlight:
-  #   type: fields
-  #   fields: 
+      list: 
+        type: pages
+        headline: Pages
+        status: published
+        templates: 
+          - channels
+          - videos
+          - page
 
-  #     mode:
-  #       type: radio
-  #       options: 
-  #         live: Live stream
-  #         random: Random videos
+      meta:
+        type: fields
+        fields:
+          info:
+            label: Clear cache
+            type: info
+            text: |
+              If updates don't reflect on the frontend, use this link to clear the cache after you are done editing.
+
+              → (link: https://stream.tcij.org/com/kinsta-clear-cache-all/ target: _blank)
+
+  settings:
+    label: Settings
+    sections:
+
+      settingsmeta:
+        type: fields
+        fields:
+
+          siteDescription:
+            label: Site description
+            type: text
+            help: Will be used for meta tags and social media
+
+
+
+
+
+# title: Site
+# preset: page
+# sections:
+
+#   list: 
+#     type: pages
+#     headline: Pages
+#     status: published
+#     templates: 
+#       - channels
+#       - videos
+#       - page
+
+#   meta:
+#     type: fields
+#     fields:
+#       info:
+#         label: Clear cache
+#         type: info
+#         text: |
+#           If updates don't reflect on the frontend, use this link to clear the cache after you are done editing.
+
+#           → (link: https://stream.tcij.org/com/kinsta-clear-cache-all/ target: _blank)

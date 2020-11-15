@@ -60,9 +60,28 @@ body {
     section#ui {
       pointer-events: none;
       opacity: 0;
-      
+    }
+    #grad-watching {
+      opacity: 0.6;
     }
     #logo-watching {
+      pointer-events: all;
+      opacity: 1;
+    }
+    #now-playing-watching {
+      opacity: 1;
+    }
+    #bottom-left {
+      pointer-events: none;
+      opacity: 0;
+    }
+  }
+  &.about {
+    section#ui {
+      pointer-events: none;
+      opacity: 0;
+    }
+    section#about {
       pointer-events: all;
       opacity: 1;
     }
@@ -70,6 +89,7 @@ body {
       pointer-events: none;
       opacity: 0;
     }
+
   }
 
   main {
@@ -123,6 +143,11 @@ a {
   }
 }
 
+hr {
+  margin: $space*1.5 0;
+  border-top: 1px solid rgba(white, 0.3);
+}
+
 $scn-size: 1.3em;
 .small-channel-num {
   @include font-bit-l;
@@ -152,6 +177,7 @@ $scn-size: 1.3em;
 // ------------------------------------------------------------------------
 
 .color-white        { color: white; }
+.color-white-30     { color: rgba(255,255,255, 0.3); }
 .color-white-50     { color: rgba(255,255,255, 0.5); }
 .color-grey         { color: #ABABAB; }
 .color-purple       { color: $purple; }
@@ -210,7 +236,7 @@ section#ui {
       min-width: calc(#{$col-w-xl} + #{$schedule-w-xl});
       @include media-breakpoint-down(lg) { min-width: calc(#{$col-w-lg} + #{$schedule-w-lg}); }
 
-      .rotated-bar .arrow::after {
+      .rotated-bar a.arrow-wrapper .arrow::after {
         content: "↑";
         content: "↓";
       }
@@ -234,9 +260,20 @@ section#ui {
       align-items: center;
       justify-content: space-between;
       padding: 0 $space 0 $space*1.5;
-      .arrow::after {
-        content: "↓";
-        content: "↑";
+
+      a.arrow-wrapper {
+        flex-grow: 1;
+        text-align: right;
+        align-self: stretch;
+        margin-left: 20px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;          
+
+        .arrow::after {
+          content: "↓";
+          content: "↑";
+        }
       }
     }
 
@@ -247,6 +284,25 @@ section#ui {
       top: 0; height: 100vh;
       left: $col-w-xl;
       overflow-y: scroll;
+
+      .schedule-title {
+        margin: $space 0 $space*3 10px;
+      }
+
+      a[data-toggle-desc] {
+        position: relative;
+        top: -6px;
+        &::after { content: url("../images/arrow-down.svg"); }
+        &.open::after { content: url("../images/arrow-up.svg"); }
+        // &::after { content: "↓"; @include font-bit-l; }
+        // &.open::after { content: "↑"; @include font-bit-l; }
+      }
+
+      .description {
+        padding: $space 0 $space/2 0;
+        display: none;
+        a { color: $purple; }
+      }
       
       .schedule-item {
         border-top: 1px solid rgba(255,255,255, 0.2);
@@ -347,6 +403,18 @@ section#ui {
   @include media-breakpoint-down(md) { display: none; }
   
   .logan-logo { max-width: 15vw; }
+
+  .credits:hover span { color: $purple; }
+}
+
+#grad-watching {
+  @include linearGradientV(rgba(0,0,0, 1), rgba(0,0,0,0));
+  @include transition(opacity 400ms);
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 120px;
+  opacity: 0;
+  pointer-events: none;
 }
 
 #top-left {
@@ -356,6 +424,65 @@ section#ui {
   left: $space;
 }
 
+#now-playing-watching {
+  position: fixed;
+  top: $space; left: $space; right: $space;
+  @include transition(opacity 400ms);
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+
+  .texts {
+    max-width: calc(100vw - 500px);
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  @include media-breakpoint-down(md) { 
+    justify-content: flex-end;
+    .texts { max-width: calc(100vw - 250px); }
+  }
+  
+}
+
+#about {
+  pointer-events: none;
+  opacity: 0;
+  @include transition(opacity 400ms);
+  position: fixed;
+  top: 0; left: 0; right: 0; 
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .content-wrapper {
+    max-width: 600px;
+    display: inline-block;
+    padding: $space;
+    max-height: 100vh;
+    overflow-y: scroll;
+
+    .text {
+      a {
+        color: $orange;
+        &:hover { text-decoration: underline; }
+      }
+    }
+  }
+
+  .close-x {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: 15px 23px;
+    color: rgba(white, 0.5);
+    &:hover { color: white; }
+  }
+}
 
 
 // ------------------------------------------------------------------------

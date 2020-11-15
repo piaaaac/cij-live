@@ -5,54 +5,44 @@ files: false
 
 fields:
 
-  streamInfo:
-    label: Stream Url or something
+  streamId:
+    label: Vimeo live stream ID
     type: text
+    width: 1/2
+
+  streamActive:
+    label: Activate live stream
+    type: toggle
+    width: 1/2
 
   schedule:
     type: structure
-    label: Schedule
+    label: Schedule of upcoming items — First active item serves as LIVE
     fields:
       
       videoItem:
-        label: Video
+        label: Video (choose from video list)
         type: pages
         query: site.find('videos').drafts
         min: 1
         max: 1
 
-      # itemTitle: 
-      #   label: Title
-      #   type: text
-    
-      # itemLabel: 
-      #   label: Label
-      #   type: text
-    
-      # itemType:
-      #   label: Program type
-      #   type: select
-      #   default: talk
-      #   options:
-      #     talk: Talk
-      #     panel: Panel
-      #     seminar: Seminar
-      #     screening: Screening
-      #     discussion: Discussion
-      #   required: true
-
       itemDate:
         label: Date
         type: date
+        width: 1/3
 
       itemTimeFrom:
         label: Time from
         type: time
-        width: 1/2
+        width: 1/3
 
       itemTimeTo:
         label: Time to
         type: time
-        width: 1/2
+        width: 1/3
 
+      isActive:
+        label: Active
+        type: toggle
 

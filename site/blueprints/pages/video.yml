@@ -30,6 +30,7 @@ fields:
     label: Vimeo id
     type: text
     required: true
+    help: Leave empty if this program is scheduled in the future
 
   # img:
   #   label: Preview image

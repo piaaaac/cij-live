@@ -4,22 +4,17 @@
 // Fonts
 // ------------------------------------------------------------------------
 
-
 @font-face {
-    font-family: NeueBit;
-    src: url("../fonts/NeueBit-Regular.otf") format("opentype");
+  font-family: NeueBit;
+  src:  url('../fonts/NeueBit-Bold/NeueBit-Bold.woff2') format('woff2'),
+        url('../fonts/NeueBit-Bold/NeueBit-Bold.woff') format('woff');
+  font-weight: bold;
 }
 
 @font-face {
-    font-family: NeueBit;
-    font-weight: bold;
-    src: url("../fonts/NeueBit-Bold.otf") format("opentype");
-}
-
-@font-face {
-    font-family: Graphik;
-    font-weight: 500;
-    src: url("../fonts/Graphik-Medium.otf") format("opentype");
+  font-family: Graphik;
+  font-weight: 500;
+  src: url("../fonts/Graphik-Medium.otf") format("opentype");
 }
 
 // @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500&display=swap');
