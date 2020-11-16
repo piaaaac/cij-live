@@ -12,7 +12,7 @@ $onChannelClick = "";
 if ($template == "channel") {
 	
 	if ($channel->videoList()->toPages()->count() > 0) {
-		
+
 		$validItems = $channel->videoList()->toPages()->filter(function ($p) {
 			return $p->vimeo()->isNotEmpty();
 		});
@@ -24,8 +24,13 @@ if ($template == "channel") {
 	}
 } elseif ($template == "channel-stream") {
 	// $onChannelClick = "onclick=\"alert('". $index ."');\"";
+	
+
+
+	// ------------------ HANDLE IF LIST EMPTY !!!!!!!!!!!!!!!!!
 	$vimeoId = $channel->streamId()->value();
-	$title = $channel->getFirstDraftVideo()->title()->value();
+	$firstVideo = $channel->getFirstDraftVideo();
+	$title = ($firstVideo !== null) ? $firstVideo->title()->value() : "Live session";
 	$onChannelClick = "onclick=\"a.changeVideo('". $vimeoId ."', '". $title ."', '". $index ."');\"";
 }
 ?>
@@ -45,6 +50,9 @@ if ($template == "channel") {
 		
 			<div class="schedule-title">
 				<h2 class="font-bit-xl color-white">Upcoming live sessions</h2>
+				<?php if ($channel->getFirstDraftVideo() === null): ?>
+					<p class="font-sans-m color-white mt-5">No items.</p>
+				<?php endif ?>
 			</div>
 
 			<?php foreach ($channel->schedule()->toStructure() as $item): ?>
@@ -66,15 +74,13 @@ if ($template == "channel") {
 								<?= $item->itemdate()->toDate('M j') ." ". 
 										$item->itemtimefrom()->toDate('G.i') ."-". 
 										$item->itemtimeto()->toDate('G.i')
-								?>
+								?> GMT
 							</span>
 							&nbsp;&nbsp;&nbsp;
 							<span class="color-purple"><?= $v->programType()->upper() ?></span>
 						</p>
-						<span class="font-sans-m color-white"
-							onclick="alert('Nothing here');"
-						><?= $v->title() ?></span>
-						<div class="description font-sans-m color-white" id="<?= $descId ?>"><?= $v->description()->kt() ?></div>
+						<span class="program-title font-sans-m font-medium color-white" onclick=""><?= $v->title() ?></span>
+						<div class="description font-sans-s color-white" id="<?= $descId ?>"><?= $v->description()->kt() ?></div>
 					</div>
 					<div class="right">
 						<?php if ($v->description()->isNotEmpty()): ?>
@@ -103,8 +109,8 @@ if ($template == "channel") {
 						><?= $v->title() ?></a>
 						-->
 						
-						<p class="font-sans-m color-white"><?= $v->title() ?></p>
-						<div class="description font-sans-m color-white" id="<?= $descId ?>"><?= $v->description()->kt() ?></div>
+						<p class="program-title font-sans-m font-medium color-white"><?= $v->title() ?></p>
+						<div class="description font-sans-s color-white" id="<?= $descId ?>"><?= $v->description()->kt() ?></div>
 						<p class="mt-2 pt-2"><a class="button"
 									onclick="a.changeVideo('<?= $v->vimeo()->value() ?>', '<?=$v->title() ?>', '<?= $index ?>', true);">
 									WATCH NOW</a></p>

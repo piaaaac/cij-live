@@ -1,0 +1,23 @@
+Title: Follow the Data: Corruption, Leaks & People vs. Power
+
+----
+
+Programtype: panel
+
+----
+
+Vimeo: 
+
+----
+
+Description:
+
+Moderated by Tatiana Bazzichelli, this talk on how open-source intelligence tools and collective strategies reconfigure investigations brings together investigative television journalist Natalie Sedletska, software artisan and ethical hacker Denis “Jaromil” Roio, and data team lead at OCCRP Friedrich Lindenberg.
+
+Featuring:
+> Denis Roio
+> Friedrich Lindenberg
+> Natalie Sedletska
+> Tatiana Bazzichelli
+
+(link: https://tcij.org/logan-symposium-event/follow-the-data-corruption-leaks-people-vs-power/ text: More info)

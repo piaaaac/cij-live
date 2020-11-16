@@ -1,0 +1,23 @@
+Title: I’ve Been Hacked!
+
+----
+
+Programtype: panel
+
+----
+
+Vimeo: 
+
+----
+
+Description:
+
+From the NSO Group to Wirecard via the activities of groups like Black Cube, Hacking Team and FinFisher, the last few years have seen a worrying trend - especially in collaborative, cross-border investigation - for governments and shady corporates to deploy spyware and private investigators to hack the phones of journalists and political dissidents.
+
+Featuring:
+> Dan McCrum
+> John Scott-Railton
+> Lorenzo Franceschi-Bicchierai
+> Runa Sandvik
+
+(link: https://tcij.org/logan-symposium-event/ive-been-hacked/ text: More info)

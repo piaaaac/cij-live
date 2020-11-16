@@ -4,10 +4,31 @@ Title: About CIJ Stream
 
 Text:
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed turpis sed ipsum vehicula bibendum imperdiet in orci. In vel vestibulum nisi. Donec sagittis nunc id erat aliquam blandit. Ut in sapien magna.
-Nulla id mollis est. In non vestibulum dui, at malesuada quam. Phasellus fermentum tempor purus ac tincidunt. More information on the (link: https://tcij.org/logan-symposium/collective-intelligence/ text: Logan Symposyum 2020) website.
+The CIJ Stream is a digital broadcast platform created by The Centre for Investigative Journalism for the 4th edition of the (link: https://tcij.org/logan text: CIJ Logan Symposium), featuring the following channels where you can watch:
+
+<p class="d-flex">
+<span class="scn mr-3 mt-1">1</span>
+<span>Live stream of the main stage sessions on November 16-19, 2020</span>
+</p>
+<p class="d-flex">
+<span class="scn mr-3 mt-1">2</span>
+<span>Sessions: Recordings of the main stage sessions available on demand</span>
+</p>
+<p class="d-flex">
+<span class="scn mr-3 mt-1">3</span>
+<span>Open Lab: Commissioned and curated videos from the (link: https://openlab.tcij.org/ text: CIJ Open Lab) database</span>
+</p>
+<p class="d-flex">
+<span class="scn mr-3 mt-1">4</span>
+<span>Archive: Staff picks from previous editions of the CIJ Logan Symposium</span>
+</p>
+
+Follow the live coverage on Twitter: (link: https://twitter.com/cijlogan text: @cijlogan) (link: https://twitter.com/hashtag/CIJLogan2020 text: #CIJLogan2020)
+Kindly supported by (link: https://www.loganfdn.org/ text: The Reva & David Logan Foundation).
 
 ---
 
-CIJ Stream is a collaboration between (link: https://tcij.org text: The Centre for Investigative Journalism) and (link: https://www.iam-internet.com/ text: IAM) for the 4th edition of the CIJ Logan Symposium. 
-This website was designed and built by (link: https://alexpiacentini.com text: Alex Piacentini).
+*Credits:
+*Design and development by (link: https://www.alexpiacentini.com/ text: Alex Piacentini)
+Live stream video production by (link: https://www.canal180.pt/ text: Canal 180)
+Concept and creative direction by (link: https://www.iam-internet.com/ text: IAM)

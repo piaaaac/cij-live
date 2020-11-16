@@ -6,36 +6,36 @@ $channels = new Pages();
 $firstVideo = null;
 $firstVideoVimeoId = null;
 $thereIsLive = false;
+$firstTitle = "";
+$defaultLabel = "NOW PLAYING";
+$streamLabel = $defaultLabel;
+$streamLabels = ["now" => "NOW PLAYING", "coming" => "COMING UP"];
 
 $liveChannel = page("channels")->children()->filterBy("template", "channel-stream")->first();
 if ($liveChannel->streamActive()->toBool() && $liveChannel->streamId()->isNotEmpty()) {
 	$thereIsLive = true;
-	
+	$streamLabelKey = $liveChannel->streamLabel()->value();
+	$streamLabel = $streamLabels[$streamLabelKey];
 	$firstVideo = $liveChannel->getFirstDraftVideo();
-	
-	// -----------------------------------------------------
-	// --- AAAAAACCTIVEEEEEEE
-	// --- Get the first video in the list
-	// $firstItem = $liveChannel->schedule()->toStructure()->first();
-	// $a = $firstItem->toArray();
-	// $id = $a["videoitem"][0];
-	// $firstVideo = page("videos")->drafts()->findById($id);
-	// kill($firstVideo->title());
-	// -----------------------------------------------------
-
+	$firstTitle = ($firstVideo !== null) ? $firstVideo->title()->value() : "Live session";
 	$firstVideoVimeoId = $liveChannel->streamId()->value();
 	$channels->add($liveChannel);
 } else {
 	$fitstChannel = page("channels")->children()->filterBy("template", "channel")->first();
 	$firstVideo = $fitstChannel->videoList()->toPages()->first();
+	$firstTitle = $firstVideo->title()->value();
 	$firstVideoVimeoId = $firstVideo->vimeo()->value();
 }
-$channels->add(page("channels")->children()->filterBy("template", "channel"));
+$channels->add(page("channels")->children()->listed()->filterBy("template", "channel"));
 
-// $defaultChannel = 2;
-
+// $cssVariable = 'style="--chn: '. $channels->count() .';"';
+ // style="--chn: <?= $channels->count() 0px;"
 ?>
-
+<style>
+	:root {
+		--chn: <?= $channels->count() ?>;
+	}
+</style>
 <main>
 	
 	<section id="bg">
@@ -55,14 +55,13 @@ $channels->add(page("channels")->children()->filterBy("template", "channel"));
 			
 			<div class="highlight-container">
 				<div class="highlight">
-					<p class="label font-sans-m color-orange">
-						<!-- <?= ucfirst($firstVideo->programType()->value()) ?> -->
+					<p class="label color-orange">
 						<span class="small-channel-num"></span>
-						<span>NOW PLAYING</span>
+						<span class="orange-label">NOW PLAYING</span>
 					</p>
 					<div class="vspace"></div>
-					<h1 class="title color-white font-bit-xxl font-bold max-text-w">
-						<?= $firstVideo->title() ?>
+					<h1 class="title color-white max-text-w">
+						<?= $firstTitle ?>
 					</h1>
 					<!-- <div class="vspace"></div> -->
 					
@@ -78,7 +77,7 @@ $channels->add(page("channels")->children()->filterBy("template", "channel"));
 			<div id="now-playing-small" class="test font-sans-m color-white">
 				<p class="font-sans-s mb-2 pb-1">
 					<span class="small-channel-num"></span>
-					<span class="label color-orange">NOW PLAYING</span>
+					<span class="label color-orange orange-label">NOW PLAYING</span>
 				</p>
 				<p class="font-sans-m color-white">
 					<a class="title" onclick='a.setMode("watching");'></a>
@@ -100,7 +99,8 @@ $channels->add(page("channels")->children()->filterBy("template", "channel"));
 
 	<div id="logo-watching" class="font-bit-xl">
 		<a onclick='a.setMode("navigation");'>
-			<span class="color-white">=</span>
+			<!-- <span class="color-white d-none d-lg-inline">=</span> -->
+			<span class="hamburger d-none d-lg-inline"><img src="<?= $kirby->url("assets") ?>/images/hamburger.svg" /></span>
 			<span class="color-purple">cij</span>
 			<span class="color-white">stream</span>
 		</a>
@@ -109,7 +109,7 @@ $channels->add(page("channels")->children()->filterBy("template", "channel"));
 	<div id="now-playing-watching">
 		<div class="texts font-sans-s color-white pt-1">
 			<span class="small-channel-num"></span>
-			<span class="label color-orange">NOW PLAYING</span>
+			<span class="label color-orange orange-label">NOW PLAYING</span>
 			<span class="title color-white ml-2"></span>
 		</div>
 	</div>
@@ -133,6 +133,24 @@ $channels->add(page("channels")->children()->filterBy("template", "channel"));
 
 	</div>
 
+	<?php /* ABOUT MARKUP
+	<p class="d-flex">
+	<span class="scn mr-3 mt-1">1</span>
+	<span>Live stream of the main stage sessions on November 16-19, 2020</span>
+	</p>
+	<p class="d-flex">
+	<span class="scn mr-3 mt-1">2</span>
+	<span>Sessions: Recordings of the main stage sessions available on demand</span>
+	</p>
+	<p class="d-flex">
+	<span class="scn mr-3 mt-1">3</span>
+	<span>Open Lab: Commissioned and curated videos from the (link: https://openlab.tcij.org/ text: CIJ Open Lab) database</span>
+	</p>
+	<p class="d-flex">
+	<span class="scn mr-3 mt-1">4</span>
+	<span>Archive: Staff picks from previous editions of the CIJ Logan Symposium</span>
+	</p>
+	*/ ?>
 	<section id="about">
 		<div class="content-wrapper">
 			<h2 class="font-bit-xl color-white mb-5"><?= page("about")->title() ?></h2>
@@ -141,9 +159,18 @@ $channels->add(page("channels")->children()->filterBy("template", "channel"));
 		<a class="close-x font-bit-xl" onclick="a.toggleAbout();">x</a>
 	</section>
 
+	<!-- Mobile -->
+
+	<div id="mob-menu">
+		<p class="font-sans-s color-orange"><span class="small-channel-num">3</span></p>
+		<a class="font-sans-m color-purple" onclick="a.toggleAbout();">About</a>
+		<a class="font-sans-m color-purple" href="https://tcij.org">tcij.org</a>
+		<span>&nbsp;</span>
+	</div>
+
+	<div id="mob-menu-btn"><a class="font-bit-xl color-white" onclick="a.toggleMobMenu();"></a></div>
+	
 </main>
-
-
 
 <?= js("assets/js/index.js") ?>
 
@@ -151,7 +178,16 @@ $channels->add(page("channels")->children()->filterBy("template", "channel"));
 	
 	var a = new App();
 	var channels;
-	a.liveStreamVimeoId = '<?= $thereIsLive ? $firstVideoVimeoId : "null" ?>';
+	a.defaultOrangeLabel = '<?= $defaultLabel ?>';
+	a.liveStream = {
+		"isActive": <?= $thereIsLive ? "true" : "false" ?>,
+		"orangeLabel": '<?= $streamLabel ?>',
+		"vimeoId": <?= $thereIsLive ? '"'. $firstVideoVimeoId .'"' : "null" ?>,
+		"channelNum": <?= $thereIsLive ? '"1"' : "null" ?>, // Live is always the first channel
+	}
+	// a.liveStreamVimeoId = '<?= $thereIsLive ? $firstVideoVimeoId : "null" ?>';
+	// a.liveStreamLabel = '<?= $streamLabel ?>';
+	// a.thereIsLive = <?= $thereIsLive ? "true" : "false" ?>;
 	
 	$(document).ready(function() {
 		var callUrl = "<?= $site->url() ?>/channels.json";
@@ -161,7 +197,7 @@ $channels->add(page("channels")->children()->filterBy("template", "channel"));
 		});
 	});
 	
-	a.initBgVideo('<?= $firstVideoVimeoId ?>', '<?= $firstVideo->title() ?>', '1');
+	a.initBgVideo('<?= $firstVideoVimeoId ?>', '<?= $firstTitle ?>', '1');
 
 </script>
 

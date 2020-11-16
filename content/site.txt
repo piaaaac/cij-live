@@ -1,1 +1,5 @@
 Title: CIJ Logan Symposium - Stream
+
+----
+
+Sitedescription: A digital broadcast platform created by The Centre for Investigative Journalism for the 4th edition of the CIJ Logan Symposium.

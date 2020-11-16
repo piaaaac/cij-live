@@ -13,8 +13,14 @@
 
 @font-face {
   font-family: Graphik;
+  font-weight: 400;
+  src: url("../fonts/Graphik/Graphik-Regular-Web.woff") format("woff");
+}
+
+@font-face {
+  font-family: Graphik;
   font-weight: 500;
-  src: url("../fonts/Graphik-Medium.otf") format("opentype");
+  src: url("../fonts/Graphik/Graphik-Medium-Web.woff") format("woff");
 }
 
 // @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500&display=swap');
@@ -36,12 +42,12 @@ $font-sans: "Graphik", sans-serif;
   @include media-breakpoint-up(xl) { font-size: $xl; }  
 }
 
-// ---------------------------------------------------- xs --- sm --- md --- lg --- xl - lsp ---- lh ---- w --- style
-@mixin font-bit-xxl { @include font-style($font-bit,  60px,  60px,  60px,  60px,  75px,    0, 0.75em,   700,   normal); }
-@mixin font-bit-xl  { @include font-style($font-bit,  40px,  40px,  40px,  40px,  54px,    0, 0.75em,   700,   normal); }
-@mixin font-bit-l   { @include font-style($font-bit,  30px,  30px,  30px,  30px,  40px,    0, 0.75em,   700,   normal); }
-@mixin font-sans-m  { @include font-style($font-sans, 18px,  18px,  18px,  18px,  18px,    0,   22px,   500,   normal); }
-@mixin font-sans-s  { @include font-style($font-sans, 14px,  14px,  14px,  14px,  14px,    0,   18px,   500,   normal); }
+// ---------------------------------------------------- xs --- sm --- md --- lg -- xl --- lsp ---- lh ---- w --- style
+@mixin font-bit-xxl { @include font-style($font-bit,  60px,  60px,  60px,  60px, 75px,      0, 0.75em,   700,   normal); }
+@mixin font-bit-xl  { @include font-style($font-bit,  40px,  40px,  40px,  40px, 54px, 0.01em, 0.85em,   700,   normal); }
+@mixin font-bit-l   { @include font-style($font-bit,  30px,  30px,  30px,  30px, 40px,      0, 0.75em,   700,   normal); }
+@mixin font-sans-m  { @include font-style($font-sans, 18px,  18px,  18px,  18px, 18px,      0,   22px,   400,   normal); }
+@mixin font-sans-s  { @include font-style($font-sans, 14px,  14px,  14px,  14px, 14px, 0.04em,   18px,   400,   normal); }
 
 .font-bit-l         { @include font-bit-l; }
 .font-bit-xl        { @include font-bit-xl; }

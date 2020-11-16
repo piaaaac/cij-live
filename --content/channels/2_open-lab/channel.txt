@@ -1,0 +1,19 @@
+Title: Open Lab
+
+----
+
+Videolist:
+
+- videos/bottled-songs
+
+----
+
+Streaminfo: 
+
+----
+
+Channeltype: videos
+
+----
+
+Video: 

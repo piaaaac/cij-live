@@ -38,7 +38,7 @@ body {
       #now-playing-small {
         opacity: 1;
         left: $space;
-        @include media-breakpoint-down(lg) { left: calc(#{$space} - #{$col-w-lg}); }
+        // @include media-breakpoint-down(lg) { left: calc(#{$space} - #{$col-w-lg}); }
         pointer-events: all;
       }
       .highlight { opacity: 0; }
@@ -89,11 +89,15 @@ body {
       pointer-events: none;
       opacity: 0;
     }
+  }
 
+  #mob-menu,
+  #mob-menu-btn {
+    display: none;
   }
 
   main {
-
+    // padding: var(--chn); // test
   }
 }
 
@@ -145,16 +149,16 @@ a {
 
 hr {
   margin: $space*1.5 0;
-  border-top: 1px solid rgba(white, 0.3);
+  border-top: 1px solid rgba(white, 0.2);
 }
 
 $scn-size: 1.3em;
-.small-channel-num {
+.small-channel-num, .scn {
   @include font-bit-l;
   color: $orange;
   font-size: 1.4em !important;
   display: inline-flex;
-  border: 2px solid #FA7936;
+  border: solid $orange 2px;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -170,6 +174,10 @@ $scn-size: 1.3em;
   min-height: $scn-size;
 
   margin-right: 0.3em;
+
+  &.tiny {
+    font-size: 0.8em !important;
+  }
 }
 
 // ------------------------------------------------------------------------
@@ -186,7 +194,8 @@ $scn-size: 1.3em;
 .hover-white:hover  { color: white; }
 .upper              { text-transform: uppercase; }
 .blurred            { filter: blur(1vh); }
-.font-bold          { font-weight: 700; }
+.font-medium        { font-weight: 500; }
+// .font-bold          { font-weight: 700; }
 .max-text-w         { max-width: 9em; }
 .vspace             { height: $space; }
 
@@ -237,8 +246,8 @@ section#ui {
       @include media-breakpoint-down(lg) { min-width: calc(#{$col-w-lg} + #{$schedule-w-lg}); }
 
       .rotated-bar a.arrow-wrapper .arrow::after {
-        content: "↑";
         content: "↓";
+        @include media-breakpoint-down(md) { content: "x"; }
       }
     }
 
@@ -252,6 +261,7 @@ section#ui {
       transform: rotate(-90deg);
       transform-origin: 50vh 50vh;
       height: $col-w-xl;
+      @include transition(height 400ms);
       @include media-breakpoint-down(lg) { height: $col-w-lg; }
       width: 100vh;
       position: absolute;
@@ -271,8 +281,8 @@ section#ui {
         align-items: center;          
 
         .arrow::after {
-          content: "↓";
           content: "↑";
+          @include media-breakpoint-down(md) { content: "+"; }
         }
       }
     }
@@ -281,6 +291,7 @@ section#ui {
       position: absolute;
       width: $schedule-w-xl;
       @include media-breakpoint-down(lg) { width: $schedule-w-lg; }
+      @include transition(opacity 50ms);
       top: 0; height: 100vh;
       left: $col-w-xl;
       overflow-y: scroll;
@@ -356,9 +367,22 @@ section#ui {
       align-items: flex-end;
       padding-bottom: $space*1.5;
       justify-content: center;
+      
       .highlight {
         @include transition(opacity 400ms);
         text-align: center;
+        
+        .label {
+          @include font-sans-m;
+          @include media-breakpoint-down(xs) { @include font-sans-s; }
+        }
+
+        .title {
+          @include font-bit-xxl;
+          // @include media-breakpoint-down(xs) { @include font-sans-m; font-weight: 500; }
+          // @include media-breakpoint-down(md) { @include font-bit-xl; }
+          @include media-breakpoint-down(xs) { @include font-bit-xl; }
+        }
       }
     }
 
@@ -394,6 +418,10 @@ section#ui {
   top: $space; 
   left: $space;
   @include transition(opacity 400ms);
+
+  .hamburger img {
+    height: 24px;
+  }
 }
 
 #bottom-left {
@@ -442,8 +470,10 @@ section#ui {
   }
 
   @include media-breakpoint-down(md) { 
-    justify-content: flex-end;
-    .texts { max-width: calc(100vw - 250px); }
+    // justify-content: flex-end;
+    // .texts { max-width: calc(100vw - 250px); }
+    top: auto; bottom: $space;
+    .texts { max-width: 100%; width: 100%; }
   }
   
 }
@@ -463,10 +493,16 @@ section#ui {
     max-width: 600px;
     display: inline-block;
     padding: $space;
-    max-height: 100vh;
+    max-height: 100%;
     overflow-y: scroll;
 
     .text {
+      p { margin-bottom: 1em; }
+      ol, ul { margin-bottom: 1em; padding-left: 1.7em; }
+      li {
+        list-style-position: inside;
+        list-style-position: outside;
+      }
       a {
         color: $orange;
         &:hover { text-decoration: underline; }
@@ -481,6 +517,161 @@ section#ui {
     padding: 15px 23px;
     color: rgba(white, 0.5);
     &:hover { color: white; }
+  }
+}
+
+
+// ------------------------------------------------------------------------
+// MOBILE MD DOWN
+// ------------------------------------------------------------------------
+
+$headerspace: 70px;
+$compressed-column: 0px;
+$schedule-left: 70px;
+
+@include media-breakpoint-down(md) {
+
+  body {
+    #mob-menu {
+      height: $headerspace;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 0 20px 5px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      opacity: 0;
+      pointer-events: none;
+      @include transition(opacity 400ms);
+    }
+
+    #mob-menu-btn {
+      position: fixed;
+      display: block;
+      top: 0px;
+      right: 0px;
+      a {
+        width: 60px;
+        height: 60px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        &::after { 
+          content: url("../images/hamburger.svg"); 
+          // height: 28px;
+        }
+      }
+    }
+
+    section#ui {
+
+      .close-programs { display: none !important; }
+      
+      #channel-1 { border-left: none; }
+      
+      [id^='channel-'] {
+        display: none;
+        // border-top: 1px solid rgba(255,255,255, 0.2);
+
+        &.expanded {
+          // min-width: calc(#{$col-w-xl} + #{$schedule-w-xl});
+          // min-width: 100%;
+          min-width: 0;
+          flex-grow: 1;
+  
+          .rotated-bar {
+            height: $schedule-left !important;
+          }
+
+          .schedule {
+            opacity: 1;
+            pointer-events: all;
+            @include transition(opacity 400ms 400ms);
+            
+          }
+        }
+
+        .rotated-bar {
+          width: calc(100vh - #{$headerspace}) !important;
+          top: -$headerspace !important;
+
+          .title {
+            order: 2;
+            width: 45vh;
+            margin-left: 40px;
+          }
+        }
+
+        // min-width: calc(100vw / var(--chn));
+
+        .schedule {
+          // width: calc(100% - 70px) !important;
+          width: calc(100vw - #{$compressed-column} * var(--chn) - 10px) !important;
+          width: calc(100vw - #{$compressed-column} * (var(--chn) - 1) - #{$schedule-left}) !important;
+          padding-bottom: 80px;
+          opacity: 0;
+          pointer-events: none;
+          
+          .schedule-item {
+            margin: 0 0 $space*3 10px !important;
+          }
+          
+          .program-title, .description {
+            margin-right: -30px;
+          }
+        }
+      }
+    }
+
+    &.xs-menu-open {
+
+      #mob-menu {
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      #mob-menu-btn {
+        a::after { content: "x"; }
+      }
+
+      #ui {
+        [id^='channel-'] {
+          display: flex;
+        }
+        top: $headerspace;
+
+        #top-left {
+          display: none;
+        }
+
+        #home {
+          display: none;
+        }
+      }
+    }
+
+    &:not(.schedule-open) {
+      [id^='channel-'] {
+        min-width: calc(100vw / var(--chn)) !important;
+        .rotated-bar {
+          height: calc(100vw / var(--chn)) !important;
+        }
+      }
+    }
+    &.schedule-open {
+      [id^='channel-'] {
+        min-width: $compressed-column !important;
+        .rotated-bar {
+          height: $compressed-column !important;
+        }
+      }
+    }
+    &.about {
+      #mob-menu, #mob-menu-btn {
+        opacity: 0;
+        pointer-events: none;
+      }
+    }
   }
 }
 

@@ -14,11 +14,11 @@ footer, header, main, menu, nav, section, summary {
   display: block; }
 
 ::-moz-selection {
-  background: #dc3545;
+  background: #8197FF;
   color: black; }
 
 ::selection {
-  background: #dc3545;
+  background: #8197FF;
   color: black; }
 
 body:not(.user-is-tabbing) button:focus,
@@ -57,8 +57,12 @@ html body input:-internal-autofill-selected {
   font-weight: bold; }
 @font-face {
   font-family: Graphik;
+  font-weight: 400;
+  src: url("../fonts/Graphik/Graphik-Regular-Web.woff") format("woff"); }
+@font-face {
+  font-family: Graphik;
   font-weight: 500;
-  src: url("../fonts/Graphik-Medium.otf") format("opentype"); }
+  src: url("../fonts/Graphik/Graphik-Medium-Web.woff") format("woff"); }
 .font-bit-l {
   font-family: "NeueBit", monospace;
   font-size: 30px;
@@ -83,8 +87,8 @@ html body input:-internal-autofill-selected {
 .font-bit-xl {
   font-family: "NeueBit", monospace;
   font-size: 40px;
-  letter-spacing: 0;
-  line-height: 0.75em;
+  letter-spacing: 0.01em;
+  line-height: 0.85em;
   font-weight: 700;
   font-style: normal;
   font-stretch: normal; }
@@ -127,7 +131,7 @@ html body input:-internal-autofill-selected {
   font-size: 18px;
   letter-spacing: 0;
   line-height: 22px;
-  font-weight: 500;
+  font-weight: 400;
   font-style: normal;
   font-stretch: normal; }
   @media (min-width: 576px) {
@@ -146,9 +150,9 @@ html body input:-internal-autofill-selected {
 .font-sans-s {
   font-family: "Graphik", sans-serif;
   font-size: 14px;
-  letter-spacing: 0;
+  letter-spacing: 0.04em;
   line-height: 18px;
-  font-weight: 500;
+  font-weight: 400;
   font-style: normal;
   font-stretch: normal; }
   @media (min-width: 576px) {
@@ -181,9 +185,6 @@ body.schedule-open section#ui #home #now-playing-small {
   opacity: 1;
   left: 20px;
   pointer-events: all; }
-  @media (max-width: 1199.98px) {
-    body.schedule-open section#ui #home #now-playing-small {
-      left: calc(20px - 60px); } }
 body.schedule-open section#ui #home .highlight {
   opacity: 0; }
 body.schedule-open section#ui #home .close-programs {
@@ -216,6 +217,9 @@ body.about section#about {
 body.about #bottom-left {
   pointer-events: none;
   opacity: 0; }
+body #mob-menu,
+body #mob-menu-btn {
+  display: none; }
 
 a {
   cursor: pointer;
@@ -232,8 +236,8 @@ a {
     width: 200px;
     font-family: "NeueBit", monospace;
     font-size: 40px;
-    letter-spacing: 0;
-    line-height: 0.75em;
+    letter-spacing: 0.01em;
+    line-height: 0.85em;
     font-weight: 700;
     font-style: normal;
     font-stretch: normal;
@@ -269,9 +273,9 @@ a {
     padding: 1px 20px 0;
     font-family: "Graphik", sans-serif;
     font-size: 14px;
-    letter-spacing: 0;
+    letter-spacing: 0.04em;
     line-height: 18px;
-    font-weight: 500;
+    font-weight: 400;
     font-style: normal;
     font-stretch: normal;
     -webkit-transition: background-color 400ms;
@@ -300,9 +304,9 @@ a {
 
 hr {
   margin: 30px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.3); }
+  border-top: 1px solid rgba(255, 255, 255, 0.2); }
 
-.small-channel-num {
+.small-channel-num, .scn {
   font-family: "NeueBit", monospace;
   font-size: 30px;
   letter-spacing: 0;
@@ -313,7 +317,7 @@ hr {
   color: #FA7935;
   font-size: 1.4em !important;
   display: inline-flex;
-  border: 2px solid #FA7936;
+  border: solid #FA7935 2px;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -328,17 +332,19 @@ hr {
   min-height: 1.3em;
   margin-right: 0.3em; }
   @media (min-width: 576px) {
-    .small-channel-num {
+    .small-channel-num, .scn {
       font-size: 30px; } }
   @media (min-width: 768px) {
-    .small-channel-num {
+    .small-channel-num, .scn {
       font-size: 30px; } }
   @media (min-width: 992px) {
-    .small-channel-num {
+    .small-channel-num, .scn {
       font-size: 30px; } }
   @media (min-width: 1200px) {
-    .small-channel-num {
+    .small-channel-num, .scn {
       font-size: 40px; } }
+  .small-channel-num.tiny, .scn.tiny {
+    font-size: 0.8em !important; }
 
 .color-white {
   color: white; }
@@ -370,8 +376,8 @@ hr {
 .blurred {
   filter: blur(1vh); }
 
-.font-bold {
-  font-weight: 700; }
+.font-medium {
+  font-weight: 500; }
 
 .max-text-w {
   max-width: 9em; }
@@ -432,12 +438,19 @@ section#ui {
         section#ui div.column.expanded {
           min-width: calc(60px + 50vw); } }
       section#ui div.column.expanded .rotated-bar a.arrow-wrapper .arrow::after {
-        content: "↑";
         content: "↓"; }
+        @media (max-width: 991.98px) {
+          section#ui div.column.expanded .rotated-bar a.arrow-wrapper .arrow::after {
+            content: "x"; } }
     section#ui div.column .rotated-bar {
       transform: rotate(-90deg);
       transform-origin: 50vh 50vh;
       height: 70px;
+      -webkit-transition: height 400ms;
+      -moz-transition: height 400ms;
+      -ms-transition: height 400ms;
+      -o-transition: height 400ms;
+      transition: height 400ms;
       width: 100vh;
       position: absolute;
       top: 0;
@@ -457,11 +470,18 @@ section#ui {
         justify-content: flex-end;
         align-items: center; }
         section#ui div.column .rotated-bar a.arrow-wrapper .arrow::after {
-          content: "↓";
           content: "↑"; }
+          @media (max-width: 991.98px) {
+            section#ui div.column .rotated-bar a.arrow-wrapper .arrow::after {
+              content: "+"; } }
     section#ui div.column .schedule {
       position: absolute;
       width: 500px;
+      -webkit-transition: opacity 50ms;
+      -moz-transition: opacity 50ms;
+      -ms-transition: opacity 50ms;
+      -o-transition: opacity 50ms;
+      transition: opacity 50ms;
       top: 0;
       height: 100vh;
       left: 70px;
@@ -509,8 +529,8 @@ section#ui {
       opacity: 0;
       font-family: "NeueBit", monospace;
       font-size: 40px;
-      letter-spacing: 0;
-      line-height: 0.75em;
+      letter-spacing: 0.01em;
+      line-height: 0.85em;
       font-weight: 700;
       font-style: normal;
       font-stretch: normal;
@@ -557,6 +577,90 @@ section#ui {
         -o-transition: opacity 400ms;
         transition: opacity 400ms;
         text-align: center; }
+        section#ui #home .highlight-container .highlight .label {
+          font-family: "Graphik", sans-serif;
+          font-size: 18px;
+          letter-spacing: 0;
+          line-height: 22px;
+          font-weight: 400;
+          font-style: normal;
+          font-stretch: normal; }
+          @media (min-width: 576px) {
+            section#ui #home .highlight-container .highlight .label {
+              font-size: 18px; } }
+          @media (min-width: 768px) {
+            section#ui #home .highlight-container .highlight .label {
+              font-size: 18px; } }
+          @media (min-width: 992px) {
+            section#ui #home .highlight-container .highlight .label {
+              font-size: 18px; } }
+          @media (min-width: 1200px) {
+            section#ui #home .highlight-container .highlight .label {
+              font-size: 18px; } }
+          @media (max-width: 575.98px) {
+            section#ui #home .highlight-container .highlight .label {
+              font-family: "Graphik", sans-serif;
+              font-size: 14px;
+              letter-spacing: 0.04em;
+              line-height: 18px;
+              font-weight: 400;
+              font-style: normal;
+              font-stretch: normal; } }
+  @media (max-width: 575.98px) and (min-width: 576px) {
+    section#ui #home .highlight-container .highlight .label {
+      font-size: 14px; } }
+  @media (max-width: 575.98px) and (min-width: 768px) {
+    section#ui #home .highlight-container .highlight .label {
+      font-size: 14px; } }
+  @media (max-width: 575.98px) and (min-width: 992px) {
+    section#ui #home .highlight-container .highlight .label {
+      font-size: 14px; } }
+  @media (max-width: 575.98px) and (min-width: 1200px) {
+    section#ui #home .highlight-container .highlight .label {
+      font-size: 14px; } }
+
+        section#ui #home .highlight-container .highlight .title {
+          font-family: "NeueBit", monospace;
+          font-size: 60px;
+          letter-spacing: 0;
+          line-height: 0.75em;
+          font-weight: 700;
+          font-style: normal;
+          font-stretch: normal; }
+          @media (min-width: 576px) {
+            section#ui #home .highlight-container .highlight .title {
+              font-size: 60px; } }
+          @media (min-width: 768px) {
+            section#ui #home .highlight-container .highlight .title {
+              font-size: 60px; } }
+          @media (min-width: 992px) {
+            section#ui #home .highlight-container .highlight .title {
+              font-size: 60px; } }
+          @media (min-width: 1200px) {
+            section#ui #home .highlight-container .highlight .title {
+              font-size: 75px; } }
+          @media (max-width: 575.98px) {
+            section#ui #home .highlight-container .highlight .title {
+              font-family: "NeueBit", monospace;
+              font-size: 40px;
+              letter-spacing: 0.01em;
+              line-height: 0.85em;
+              font-weight: 700;
+              font-style: normal;
+              font-stretch: normal; } }
+  @media (max-width: 575.98px) and (min-width: 576px) {
+    section#ui #home .highlight-container .highlight .title {
+      font-size: 40px; } }
+  @media (max-width: 575.98px) and (min-width: 768px) {
+    section#ui #home .highlight-container .highlight .title {
+      font-size: 40px; } }
+  @media (max-width: 575.98px) and (min-width: 992px) {
+    section#ui #home .highlight-container .highlight .title {
+      font-size: 40px; } }
+  @media (max-width: 575.98px) and (min-width: 1200px) {
+    section#ui #home .highlight-container .highlight .title {
+      font-size: 54px; } }
+
     section#ui #home .watch {
       position: fixed;
       top: 0;
@@ -569,8 +673,8 @@ section#ui {
       justify-content: center;
       font-family: "NeueBit", monospace;
       font-size: 40px;
-      letter-spacing: 0;
-      line-height: 0.75em;
+      letter-spacing: 0.01em;
+      line-height: 0.85em;
       font-weight: 700;
       font-style: normal;
       font-stretch: normal;
@@ -618,6 +722,8 @@ section#ui {
   -ms-transition: opacity 400ms;
   -o-transition: opacity 400ms;
   transition: opacity 400ms; }
+  #logo-watching .hamburger img {
+    height: 24px; }
 
 #bottom-left {
   position: fixed;
@@ -689,9 +795,11 @@ section#ui {
     overflow: hidden; }
   @media (max-width: 991.98px) {
     #now-playing-watching {
-      justify-content: flex-end; }
+      top: auto;
+      bottom: 20px; }
       #now-playing-watching .texts {
-        max-width: calc(100vw - 250px); } }
+        max-width: 100%;
+        width: 100%; } }
 
 #about {
   pointer-events: none;
@@ -713,8 +821,16 @@ section#ui {
     max-width: 600px;
     display: inline-block;
     padding: 20px;
-    max-height: 100vh;
+    max-height: 100%;
     overflow-y: scroll; }
+    #about .content-wrapper .text p {
+      margin-bottom: 1em; }
+    #about .content-wrapper .text ol, #about .content-wrapper .text ul {
+      margin-bottom: 1em;
+      padding-left: 1.7em; }
+    #about .content-wrapper .text li {
+      list-style-position: inside;
+      list-style-position: outside; }
     #about .content-wrapper .text a {
       color: #FA7935; }
       #about .content-wrapper .text a:hover {
@@ -727,5 +843,97 @@ section#ui {
     color: rgba(255, 255, 255, 0.5); }
     #about .close-x:hover {
       color: white; }
+
+@media (max-width: 991.98px) {
+  body #mob-menu {
+    height: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0 20px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    pointer-events: none;
+    -webkit-transition: opacity 400ms;
+    -moz-transition: opacity 400ms;
+    -ms-transition: opacity 400ms;
+    -o-transition: opacity 400ms;
+    transition: opacity 400ms; }
+  body #mob-menu-btn {
+    position: fixed;
+    display: block;
+    top: 0px;
+    right: 0px; }
+    body #mob-menu-btn a {
+      width: 60px;
+      height: 60px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center; }
+      body #mob-menu-btn a::after {
+        content: url("../images/hamburger.svg"); }
+  body section#ui .close-programs {
+    display: none !important; }
+  body section#ui #channel-1 {
+    border-left: none; }
+  body section#ui [id^='channel-'] {
+    display: none; }
+    body section#ui [id^='channel-'].expanded {
+      min-width: 0;
+      flex-grow: 1; }
+      body section#ui [id^='channel-'].expanded .rotated-bar {
+        height: 70px !important; }
+      body section#ui [id^='channel-'].expanded .schedule {
+        opacity: 1;
+        pointer-events: all;
+        -webkit-transition: opacity 400ms 400ms;
+        -moz-transition: opacity 400ms 400ms;
+        -ms-transition: opacity 400ms 400ms;
+        -o-transition: opacity 400ms 400ms;
+        transition: opacity 400ms 400ms; }
+    body section#ui [id^='channel-'] .rotated-bar {
+      width: calc(100vh - 70px) !important;
+      top: -70px !important; }
+      body section#ui [id^='channel-'] .rotated-bar .title {
+        order: 2;
+        width: 45vh;
+        margin-left: 40px; }
+    body section#ui [id^='channel-'] .schedule {
+      width: calc(100vw - 0px * var(--chn) - 10px) !important;
+      width: calc(100vw - 0px * (var(--chn) - 1) - 70px) !important;
+      padding-bottom: 80px;
+      opacity: 0;
+      pointer-events: none; }
+      body section#ui [id^='channel-'] .schedule .schedule-item {
+        margin: 0 0 60px 10px !important; }
+      body section#ui [id^='channel-'] .schedule .program-title, body section#ui [id^='channel-'] .schedule .description {
+        margin-right: -30px; }
+  body.xs-menu-open #mob-menu {
+    opacity: 1;
+    pointer-events: all; }
+  body.xs-menu-open #mob-menu-btn a::after {
+    content: "x"; }
+  body.xs-menu-open #ui {
+    top: 70px; }
+    body.xs-menu-open #ui [id^='channel-'] {
+      display: flex; }
+    body.xs-menu-open #ui #top-left {
+      display: none; }
+    body.xs-menu-open #ui #home {
+      display: none; }
+  body:not(.schedule-open) [id^='channel-'] {
+    min-width: calc(100vw / var(--chn)) !important; }
+    body:not(.schedule-open) [id^='channel-'] .rotated-bar {
+      height: calc(100vw / var(--chn)) !important; }
+  body.schedule-open [id^='channel-'] {
+    min-width: 0px !important; }
+    body.schedule-open [id^='channel-'] .rotated-bar {
+      height: 0px !important; }
+  body.about #mob-menu, body.about #mob-menu-btn {
+    opacity: 0;
+    pointer-events: none; } }
 
 /*# sourceMappingURL=index.css.map */

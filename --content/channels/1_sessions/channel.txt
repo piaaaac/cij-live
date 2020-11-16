@@ -1,0 +1,20 @@
+Title: Sessions
+
+----
+
+Videolist:
+
+- >
+  videos/cij-logan-2020-theme-trailer-collective-intelligence
+
+----
+
+Streaminfo: 
+
+----
+
+Channeltype: videos
+
+----
+
+Video: 

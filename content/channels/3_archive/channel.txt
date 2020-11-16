@@ -5,16 +5,14 @@ Title: Archive
 Videolist:
 
 - >
-  videos/investigating-state-brutality-blaming-the-messenger
+  videos/gavin-macfadyen-opening-of-cij-logan-symposium-2014
+- videos/julian-assange
 - >
-  videos/the-new-intermediaries-falling-through-the-cracks
-- videos/opening-plenary
+  videos/julian-assange-guide-to-whistleblowers
+- videos/a-history-of-hacking
+- videos/what-should-we-be-afraid-of
 - >
-  videos/conversation-the-new-intermediaries
-- videos/ai-weiwei-edward-snowden
-- videos/opening-ceremony-trailer
-- >
-  videos/statement-by-rui-pinto-stella-morris
+  videos/the-death-of-khashoggi-and-the-reach-of-surveillance-regimes
 
 ----
 

@@ -62,6 +62,7 @@ function App () {
 
       this.player.setMuted(false);
       $("body").addClass("watching");
+$('body').removeClass('xs-menu-open');
       this.videoContainer.css({ "transform": "scale(1)" });
       this.player.play();
       this.isPaused = false;
@@ -103,6 +104,12 @@ function App () {
     $("[id^='channel-'] .title").removeClass("active");
     $("#channel-"+ channelNum +" .title").addClass("active");
 
+    var label = this.defaultOrangeLabel;
+    if (this.liveStream.isActive && channelNum == this.liveStream.channelNum) {
+      label = this.liveStream.orangeLabel;
+    }
+    $(".orange-label").text(label);
+
     // --- Reset sizes
 
     var that = this;
@@ -141,6 +148,7 @@ function App () {
 
   this.changeVideo = function (id, title, channelNum, startWatching) {
     this.player.destroy();
+// if (startWatching) {  }
     this.initBgVideo(id, title, channelNum, startWatching);
   }
 
@@ -166,6 +174,20 @@ function App () {
       doShow = !$("body").hasClass("about");
     }
     $("body").toggleClass("about", doShow);
+  }
+
+  this.toggleMobMenu = function () {
+    var isOpening = !$('body').hasClass('xs-menu-open');
+    if (isOpening) {
+      if (this.mode == "watching") {
+        this.setMode("navigation");
+      }
+      $('body').addClass('xs-menu-open');
+    }
+    if (!isOpening) {
+      this.setMode("watching");
+      $('body').removeClass('xs-menu-open');
+    }
   }
 }
 
