@@ -40,8 +40,9 @@ if ($template == "channel") {
 		<a class="title font-bit-xl color-white" <?= $onChannelClick ?>>
 			<?= $index ?>&nbsp;&nbsp;&nbsp;<?= $channel->title() ?>
 		</a>
-		<a class="arrow-wrapper font-bit-xl color-white-50 hover-white" onclick="a.toggleSchedule('channel-<?= $index ?>');">
-			<span class="arrow "></span>
+		<a class="arrow-wrapper font-bit-xl color-purple" onclick="a.toggleSchedule('channel-<?= $index ?>');">
+			<span class="schedule-text font-sans-s mr-4 d-none d-lg-block"></span>
+			<span class="arrow"></span>
 		</a>
 	</div>
 	<div class="schedule">

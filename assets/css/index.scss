@@ -245,9 +245,18 @@ section#ui {
       min-width: calc(#{$col-w-xl} + #{$schedule-w-xl});
       @include media-breakpoint-down(lg) { min-width: calc(#{$col-w-lg} + #{$schedule-w-lg}); }
 
-      .rotated-bar a.arrow-wrapper .arrow::after {
-        content: "↓";
-        @include media-breakpoint-down(md) { content: "x"; }
+      .rotated-bar a.arrow-wrapper {
+        .arrow::after {
+          // content: "↓";
+          // @include media-breakpoint-down(md) { content: "x"; }
+          content: "x";
+        }
+        &:hover {
+          .schedule-text { 
+            opacity: 1; 
+            &::after { content: "Hide schedule"; }
+          }
+        }
       }
     }
 
@@ -271,6 +280,12 @@ section#ui {
       justify-content: space-between;
       padding: 0 $space 0 $space*1.5;
 
+      .title:hover { opacity: 0.8; }
+
+      .schedule-text {
+        opacity: 0;
+      }
+
       a.arrow-wrapper {
         flex-grow: 1;
         text-align: right;
@@ -278,11 +293,19 @@ section#ui {
         margin-left: 20px;
         display: flex;
         justify-content: flex-end;
-        align-items: center;          
+        align-items: center;
+
+        &:hover {
+          .schedule-text { 
+            opacity: 1; 
+            &::after { content: "Show schedule"; }
+          }
+        }
 
         .arrow::after {
-          content: "↑";
-          @include media-breakpoint-down(md) { content: "+"; }
+          // content: "↑";
+          // @include media-breakpoint-down(md) { content: "+"; }
+          content: "+";
         }
       }
     }
@@ -295,6 +318,7 @@ section#ui {
       top: 0; height: 100vh;
       left: $col-w-xl;
       overflow-y: scroll;
+      padding-bottom: 200px;
 
       .schedule-title {
         margin: $space 0 $space*3 10px;
@@ -608,7 +632,7 @@ $schedule-left: 70px;
           // width: calc(100% - 70px) !important;
           width: calc(100vw - #{$compressed-column} * var(--chn) - 10px) !important;
           width: calc(100vw - #{$compressed-column} * (var(--chn) - 1) - #{$schedule-left}) !important;
-          padding-bottom: 80px;
+          // padding-bottom: 80px;
           opacity: 0;
           pointer-events: none;
           

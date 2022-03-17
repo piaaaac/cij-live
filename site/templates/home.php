@@ -72,7 +72,7 @@ $channels->add(page("channels")->children()->listed()->filterBy("template", "cha
 				</div>
 			</div>
 
-			<div class="close-programs"><a onclick="a.home();">x</a></div>
+			<!-- <div class="close-programs"><a onclick="a.home();">x</a></div> -->
 
 			<div id="now-playing-small" class="test font-sans-m color-white">
 				<p class="font-sans-s mb-2 pb-1">

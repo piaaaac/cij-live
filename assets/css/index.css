@@ -438,10 +438,11 @@ section#ui {
         section#ui div.column.expanded {
           min-width: calc(60px + 50vw); } }
       section#ui div.column.expanded .rotated-bar a.arrow-wrapper .arrow::after {
-        content: "↓"; }
-        @media (max-width: 991.98px) {
-          section#ui div.column.expanded .rotated-bar a.arrow-wrapper .arrow::after {
-            content: "x"; } }
+        content: "x"; }
+      section#ui div.column.expanded .rotated-bar a.arrow-wrapper:hover .schedule-text {
+        opacity: 1; }
+        section#ui div.column.expanded .rotated-bar a.arrow-wrapper:hover .schedule-text::after {
+          content: "Hide schedule"; }
     section#ui div.column .rotated-bar {
       transform: rotate(-90deg);
       transform-origin: 50vh 50vh;
@@ -461,6 +462,10 @@ section#ui {
       @media (max-width: 1199.98px) {
         section#ui div.column .rotated-bar {
           height: 60px; } }
+      section#ui div.column .rotated-bar .title:hover {
+        opacity: 0.8; }
+      section#ui div.column .rotated-bar .schedule-text {
+        opacity: 0; }
       section#ui div.column .rotated-bar a.arrow-wrapper {
         flex-grow: 1;
         text-align: right;
@@ -469,11 +474,12 @@ section#ui {
         display: flex;
         justify-content: flex-end;
         align-items: center; }
+        section#ui div.column .rotated-bar a.arrow-wrapper:hover .schedule-text {
+          opacity: 1; }
+          section#ui div.column .rotated-bar a.arrow-wrapper:hover .schedule-text::after {
+            content: "Show schedule"; }
         section#ui div.column .rotated-bar a.arrow-wrapper .arrow::after {
-          content: "↑"; }
-          @media (max-width: 991.98px) {
-            section#ui div.column .rotated-bar a.arrow-wrapper .arrow::after {
-              content: "+"; } }
+          content: "+"; }
     section#ui div.column .schedule {
       position: absolute;
       width: 500px;
@@ -485,7 +491,8 @@ section#ui {
       top: 0;
       height: 100vh;
       left: 70px;
-      overflow-y: scroll; }
+      overflow-y: scroll;
+      padding-bottom: 200px; }
       @media (max-width: 1199.98px) {
         section#ui div.column .schedule {
           width: 50vw; } }
@@ -904,7 +911,6 @@ section#ui {
     body section#ui [id^='channel-'] .schedule {
       width: calc(100vw - 0px * var(--chn) - 10px) !important;
       width: calc(100vw - 0px * (var(--chn) - 1) - 70px) !important;
-      padding-bottom: 80px;
       opacity: 0;
       pointer-events: none; }
       body section#ui [id^='channel-'] .schedule .schedule-item {
